@@ -7,6 +7,7 @@ import ListingGrid from "@/components/airbnb/ListingGrid";
 import Services from "@/components/airbnb/Services";
 import AirbnbFooter from "@/components/airbnb/Footer";
 import AuditForm from "@/components/airbnb/AuditForm";
+import CartWidget from "@/components/airbnb/CartWidget";
 
 const pricingCards = [
   {
@@ -233,6 +234,7 @@ export default function Home() {
       </main>
 
       <AirbnbFooter />
+      <CartWidget />
     </>
   );
 }

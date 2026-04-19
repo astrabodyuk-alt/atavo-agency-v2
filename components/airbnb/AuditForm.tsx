@@ -4,32 +4,38 @@ import { useState, useEffect, useRef } from "react";
 import { useSearchStore } from "@/lib/searchStore";
 
 export default function AuditForm() {
-  const { businessType, timeline, budget, submitTrigger } = useSearchStore();
+  const { businessType, timeline, budget, submitTrigger, cartMessage, setCartMessage } =
+    useSearchStore();
 
   const [business, setBusiness] = useState("");
   const [website, setWebsite] = useState("");
   const [message, setMessage] = useState("");
 
-  const businessRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (submitTrigger === 0) return;
 
-    if (businessType) setBusiness(businessType);
+    // Cart-based prefill takes precedence over pill-based prefill
+    if (cartMessage) {
+      setMessage(cartMessage);
+      setCartMessage(null);
+    } else {
+      if (businessType) setBusiness(businessType);
 
-    const lines = [
-      businessType && `Business type: ${businessType}`,
-      timeline && `Timeline: ${timeline}`,
-      budget && `Budget: ${budget}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+      const lines = [
+        businessType && `Business type: ${businessType}`,
+        timeline && `Timeline: ${timeline}`,
+        budget && `Budget: ${budget}`,
+      ]
+        .filter(Boolean)
+        .join("\n");
 
-    const prefilled = lines ? lines + "\n\nWhat I'd love to fix or build: " : "";
-    if (prefilled) setMessage(prefilled);
+      const prefilled = lines ? lines + "\n\nWhat I'd love to fix or build: " : "";
+      if (prefilled) setMessage(prefilled);
+    }
 
-    // After scroll completes: focus textarea, cursor at end
+    // Focus textarea with cursor at end after scroll settles
     setTimeout(() => {
       const ta = messageRef.current;
       if (!ta) return;
@@ -59,7 +65,6 @@ export default function AuditForm() {
           What&apos;s your business?
         </label>
         <input
-          ref={businessRef}
           type="text"
           name="business"
           value={business}

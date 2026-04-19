@@ -15,7 +15,6 @@ export default function HeroBanner() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#1F1A16]/70 via-[#1F1A16]/30 to-transparent" />
       {/* Content */}
       <div className="absolute bottom-0 left-0 p-16">
-        <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium block mb-3">Featured</span>
         <h1 className="font-display font-light text-[#F5F0E8] text-5xl lg:text-6xl leading-[1.05] max-w-2xl mb-4">
           Your competitors are online. Are you?
         </h1>
