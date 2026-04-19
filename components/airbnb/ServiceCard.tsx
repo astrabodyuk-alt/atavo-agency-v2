@@ -30,7 +30,6 @@ export default function ServiceCard({ service }: Props) {
     });
   }
 
-  // ─── Price block ──────────────────────────────────────────────────────────
   let primaryPrice: string;
   let priceTag: string | null = null;
 
@@ -46,9 +45,10 @@ export default function ServiceCard({ service }: Props) {
   }
 
   return (
-    <article className="group flex flex-col">
-      {/* Image — 4:3, rounded, hover zoom */}
-      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl bg-[#E8DFD2]">
+    <div className="flex flex-col h-full bg-[#F5F0E8] rounded-2xl overflow-hidden border border-[#E4DACC] group">
+
+      {/* Image — hauteur fixe via aspect-ratio */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image
           src={service.image}
           alt={service.title}
@@ -56,7 +56,6 @@ export default function ServiceCard({ service }: Props) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
-        {/* Badge — top left */}
         {service.badge && (
           <span
             className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-medium uppercase tracking-[0.08em] ${badgeStyles[service.badge]}`}
@@ -64,7 +63,6 @@ export default function ServiceCard({ service }: Props) {
             {service.badge}
           </span>
         )}
-        {/* In-cart — tap to remove */}
         {inCart && (
           <button
             onClick={(e) => { e.stopPropagation(); remove(service.id); }}
@@ -76,35 +74,39 @@ export default function ServiceCard({ service }: Props) {
         )}
       </div>
 
-      {/* Details below image */}
-      <div className="pt-4 flex flex-col gap-2">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="font-display font-light text-[#1F1A16] text-base md:text-lg leading-tight flex items-center gap-2.5">
-            <Icon
-              size={18}
-              strokeWidth={1.5}
-              className="text-[#8A7B6C] shrink-0 translate-y-[1px]"
-            />
-            <span>{service.title}</span>
+      {/* Header titre + prix — min-height pour absorber la variation One-off tag */}
+      <div className="min-h-[80px] px-5 pt-5 flex items-start justify-between gap-3">
+        <div className="flex items-start gap-2">
+          <Icon
+            size={18}
+            strokeWidth={1.5}
+            className="text-[#8A7B6C] shrink-0 mt-1"
+          />
+          <h3 className="font-display font-light text-[#1F1A16] text-base md:text-lg leading-tight">
+            {service.title}
           </h3>
-          <div className="text-right shrink-0 flex flex-col items-end">
-            <span className="font-display font-light text-base text-[#1F1A16] whitespace-nowrap">
-              {primaryPrice}
-            </span>
-            {priceTag && (
-              <span className="text-xs text-[#8A7B6C] italic">{priceTag}</span>
-            )}
-          </div>
         </div>
+        <div className="text-right shrink-0 flex flex-col items-end">
+          <span className="font-display font-light text-base text-[#1F1A16] whitespace-nowrap">
+            {primaryPrice}
+          </span>
+          {priceTag && (
+            <span className="text-xs text-[#8A7B6C] italic mt-1">{priceTag}</span>
+          )}
+        </div>
+      </div>
 
-        <p className="text-sm text-[#8A7B6C] leading-relaxed line-clamp-2">
-          {service.description}
-        </p>
+      {/* Description — flex-grow pour absorber l'espace restant */}
+      <p className="flex-grow px-5 pt-3 text-sm text-[#8A7B6C] leading-relaxed">
+        {service.description}
+      </p>
 
+      {/* Bouton — wrapper isolé, poussé en bas par flex-grow de la description */}
+      <div className="px-5 pb-5 pt-5">
         <button
           onClick={handleAdd}
           disabled={inCart}
-          className={`mt-3 w-full rounded-full px-4 py-2.5 text-sm font-medium transition-all ${
+          className={`w-full py-3 rounded-full text-sm font-medium transition-all ${
             inCart
               ? "bg-[#E4DACC] text-[#8A7B6C] cursor-not-allowed"
               : "bg-[#1F1A16] text-[#F5F0E8] hover:bg-[#2a241e]"
@@ -113,6 +115,7 @@ export default function ServiceCard({ service }: Props) {
           {inCart ? "✓ Added to build" : "Add to build"}
         </button>
       </div>
-    </article>
+
+    </div>
   );
 }
