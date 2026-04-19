@@ -195,10 +195,10 @@ export default function AirbnbHeader() {
           </div>
           <nav className="flex flex-col gap-6">
             {[
-              { label: "Work", href: "/work" },
-              { label: "Services", href: "/services" },
-              { label: "About", href: "/about" },
-              { label: "Pricing", href: "/pricing" },
+              { label: "Work", href: "/#work" },
+              { label: "Services", href: "/#services" },
+              { label: "About", href: "/#about" },
+              { label: "Pricing", href: "/#pricing" },
             ].map((link) => (
               <Link
                 key={link.href}

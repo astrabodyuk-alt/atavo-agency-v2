@@ -1,12 +1,83 @@
 import Link from "next/link";
-import { Check, Compass, Search, Target } from "lucide-react";
+import { Check, Compass, Search, Target, Globe, LayoutDashboard, Zap, Tag, FileText } from "lucide-react";
 import AirbnbHeader from "@/components/airbnb/Header";
 import CategoryBar from "@/components/airbnb/CategoryBar";
 import HeroBanner from "@/components/airbnb/HeroBanner";
 import ListingGrid from "@/components/airbnb/ListingGrid";
-import InspirationRail from "@/components/airbnb/InspirationRail";
 import AirbnbFooter from "@/components/airbnb/Footer";
 import AuditForm from "@/components/airbnb/AuditForm";
+
+const services = [
+  { name: "Websites", sub: "Bespoke build", icon: Globe },
+  { name: "SaaS", sub: "Dashboards and MVPs", icon: LayoutDashboard },
+  { name: "Automation", sub: "Make & n8n", icon: Zap },
+  { name: "SEO Audit", sub: "72h delivery", icon: Search },
+  { name: "Branding", sub: "Logo + palette", icon: Tag },
+  { name: "Copy", sub: "Site + email", icon: FileText },
+];
+
+const method = [
+  {
+    icon: Compass,
+    num: "01",
+    title: "Business deep-dive",
+    desc: "Before a pixel, we map your offer, your margins, your buyer. A site that does not know its buyer is a brochure with a URL.",
+  },
+  {
+    icon: Search,
+    num: "02",
+    title: "Competitor intelligence",
+    desc: "We audit the 5 businesses fighting you for the same keywords. Then we build something they cannot copy in a weekend.",
+  },
+  {
+    icon: Target,
+    num: "03",
+    title: "Strategic positioning",
+    desc: "Every section, every button, every photograph earns its spot. No filler. No stock-feeling hero video. Clear position, clear ask.",
+  },
+];
+
+const pricingCards = [
+  {
+    label: "Audit",
+    price: "Free",
+    duration: "72 hours",
+    featured: false,
+    items: [
+      "Your Google visibility in your postcode",
+      "Your site measured against your top three",
+      "Your Google Business profile, line by line",
+      "One quiet upgrade for this week",
+    ],
+    cta: "Send AUDIT in DM",
+  },
+  {
+    label: "Site",
+    price: "From £1,500",
+    duration: "10 days",
+    featured: false,
+    items: [
+      "Bespoke site in the voice of your business",
+      "Google Business Profile setup",
+      "Local SEO on your postcode",
+      "Three revisions",
+    ],
+    cta: "Book a call",
+  },
+  {
+    label: "Site + SaaS",
+    price: "From £3,000",
+    duration: "14 days",
+    featured: true,
+    items: [
+      "Everything in Site",
+      "WhatsApp / email auto-reply assistant",
+      "Birthday and loyalty automations",
+      "Three months of quiet maintenance",
+    ],
+    cta: "Book a call",
+  },
+];
 
 export default function Home() {
   return (
@@ -15,42 +86,46 @@ export default function Home() {
       <CategoryBar />
 
       <main className="bg-[#F5F0E8]">
-        {/* 2.3 — Hero Banner */}
+        {/* Hero */}
         <HeroBanner />
 
-        {/* 2.4 — Selected Work Grid (Airbnb listings clone) */}
-        <ListingGrid />
+        {/* Work */}
+        <div id="work">
+          <ListingGrid />
+        </div>
 
-        {/* 2.5 — Horizontal Rail "Continue exploring" */}
-        <InspirationRail />
-
-        {/* 2.6 — Method Section */}
-        <section className="py-20 px-10 bg-[#E8DFD2]">
-          <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">How We Build</span>
-          <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-12">
-            Why our sites actually sell.
+        {/* Services — merged rail + method */}
+        <section id="services" className="py-20 px-10 bg-[#E8DFD2]">
+          <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">Services</span>
+          <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-2">
+            What we build.
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Compass,
-                num: "01",
-                title: "Business deep-dive",
-                desc: "Before a pixel, we map your offer, your margins, your buyer. A site that does not know its buyer is a brochure with a URL.",
-              },
-              {
-                icon: Search,
-                num: "02",
-                title: "Competitor intelligence",
-                desc: "We audit the 5 businesses fighting you for the same keywords. Then we build something they cannot copy in a weekend.",
-              },
-              {
-                icon: Target,
-                num: "03",
-                title: "Strategic positioning",
-                desc: "Every section, every button, every photograph earns its spot. No filler. No stock-feeling hero video. Clear position, clear ask.",
-              },
-            ].map(({ icon: Icon, num, title, desc }) => (
+          <p className="text-[#8A7B6C] text-base mb-12">
+            Websites that sell. SaaS that retains. Audits that reveal.
+          </p>
+
+          {/* Service cards — scrollable row */}
+          <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 mb-16">
+            {services.map(({ name, sub, icon: Icon }) => (
+              <Link
+                href="#audit"
+                key={name}
+                className="w-64 flex-shrink-0 h-24 rounded-xl bg-[#F5F0E8] border border-[#E4DACC] px-5 flex items-center gap-4 hover:shadow-md transition-shadow"
+              >
+                <div className="h-14 w-14 rounded-md bg-[#1F1A16]/5 flex items-center justify-center shrink-0">
+                  <Icon size={22} className="text-[#1F1A16]" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-[#1F1A16]">{name}</p>
+                  <p className="text-xs text-[#8A7B6C]">{sub}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Method steps */}
+          <div className="grid md:grid-cols-3 gap-8 border-t border-[#E4DACC] pt-12">
+            {method.map(({ icon: Icon, num, title, desc }) => (
               <div key={num}>
                 <div className="h-12 w-12 rounded-full bg-[#F5F0E8] flex items-center justify-center mb-4">
                   <Icon size={20} className="text-[#1F1A16]" />
@@ -64,72 +139,72 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 2.7 — Pricing */}
-        <section className="py-20 px-10 bg-[#F5F0E8]">
-          <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">Pricing</span>
-          <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-12">
-            Two ways in.
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
-            {/* Card A */}
-            <div className="bg-[#F5F0E8] border border-[#E4DACC] rounded-xl p-8">
-              <p className="uppercase tracking-wider text-xs text-[#8A7B6C] mb-4">Audit</p>
-              <p className="font-display font-light text-5xl text-[#1F1A16] mb-2">£299</p>
-              <p className="text-[#8A7B6C] text-sm mb-8">One-off, delivered in 72h</p>
-              <ul className="flex flex-col gap-3 mb-8">
-                {[
-                  "Full competitor audit (5 businesses)",
-                  "On-page + technical SEO review",
-                  "Conversion + UX report",
-                  "Priority action list (90 days)",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-[#8A7B6C]">
-                    <Check size={16} className="text-[#C9A875] mt-0.5 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="#audit"
-                className="block text-center border border-[#1F1A16] text-[#1F1A16] rounded-sm py-3 text-sm font-medium hover:bg-[#1F1A16] hover:text-[#F5F0E8] transition-colors"
-              >
-                Start with an audit
-              </Link>
-            </div>
-            {/* Card B */}
-            <div className="bg-[#1F1A16] text-[#F5F0E8] rounded-xl p-8 relative">
-              <span className="absolute top-6 right-6 bg-[#C9A875] text-[#1F1A16] rounded-md text-xs px-2 py-1 font-semibold">
-                Most popular
-              </span>
-              <p className="uppercase tracking-wider text-xs text-[#F5F0E8]/60 mb-4">Website</p>
-              <p className="font-display font-light text-5xl text-[#F5F0E8] mb-2">£699</p>
-              <p className="text-[#F5F0E8]/70 text-sm mb-8">From audit to live in 10 days</p>
-              <ul className="flex flex-col gap-3 mb-8">
-                {[
-                  "Bespoke design, not a template",
-                  "Built on Next.js + Vercel",
-                  "Mobile-first, SEO-ready, fast",
-                  "90 days of post-launch support",
-                  "All pages, all copy, all imagery",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-[#F5F0E8]/70">
-                    <Check size={16} className="text-[#C9A875] mt-0.5 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="#audit"
-                className="block text-center bg-[#F5F0E8] text-[#1F1A16] rounded-sm py-3 text-sm font-medium hover:bg-[#E8DFD2] transition-colors"
-              >
-                Book a free audit first
-              </Link>
-            </div>
+        {/* About — The Studio */}
+        <section id="about" className="py-20 px-10 bg-[#F5F0E8]">
+          <div className="max-w-2xl">
+            <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">The Studio</span>
+            <p className="text-[#8A7B6C] text-sm mt-3 mb-6 tracking-wide">
+              Slow atelier &middot; Winchester &middot; Hampshire
+            </p>
+            <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl leading-[1.1] mb-8">
+              One quiet workshop for businesses that want to grow.
+            </h2>
+            <p className="text-[#8A7B6C] leading-relaxed text-base mb-6">
+              Atavo is a small digital studio in Hampshire. We build websites, SaaS and automations for a handful of businesses each quarter — beauty houses, restaurants, cellars, craftsmen, trades. Before we build, we audit. Before we ship, we read. Three clients a month. No more.
+            </p>
+            <p className="text-[#8A7B6C] text-sm font-medium mt-8">— Nigel, Winchester</p>
           </div>
         </section>
 
-        {/* 2.8 — Audit Form */}
-        <section id="audit" className="py-20 px-10 bg-[#E8DFD2]">
+        {/* Pricing — 3 cards */}
+        <section id="pricing" className="py-20 px-10 bg-[#E8DFD2]">
+          <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">Pricing</span>
+          <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-12">
+            Three ways in.
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl">
+            {pricingCards.map((card) => (
+              <div
+                key={card.label}
+                className={`rounded-xl p-8 flex flex-col ${
+                  card.featured
+                    ? "bg-[#E8DFD2] border-2 border-[#C9A875] relative"
+                    : "bg-[#F5F0E8] border border-[#E4DACC]"
+                }`}
+              >
+                {card.featured && (
+                  <span className="absolute top-5 right-5 bg-[#C9A875] text-[#1F1A16] text-xs font-semibold px-2 py-1 rounded-md">
+                    Best value
+                  </span>
+                )}
+                <p className="uppercase tracking-wider text-xs text-[#8A7B6C] mb-4">{card.label}</p>
+                <p className="font-display font-light text-4xl text-[#1F1A16] mb-1">{card.price}</p>
+                <p className="text-[#8A7B6C] text-sm mb-8">{card.duration}</p>
+                <ul className="flex flex-col gap-3 mb-8 flex-1">
+                  {card.items.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-[#8A7B6C]">
+                      <Check size={15} className="text-[#C9A875] mt-0.5 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="#audit"
+                  className={`block text-center rounded-sm py-3 text-sm font-medium transition-colors ${
+                    card.featured
+                      ? "bg-[#1F1A16] text-[#F5F0E8] hover:bg-[#1F1A16]/90"
+                      : "border border-[#1F1A16] text-[#1F1A16] hover:bg-[#1F1A16] hover:text-[#F5F0E8]"
+                  }`}
+                >
+                  {card.cta}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Audit Form */}
+        <section id="audit" className="py-20 px-10 bg-[#F5F0E8]">
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl">
             <div>
               <h2 className="font-display font-light text-4xl text-[#1F1A16] mb-4">
@@ -149,7 +224,7 @@ export default function Home() {
               </blockquote>
             </div>
 
-            <div className="bg-[#F5F0E8] border border-[#E4DACC] rounded-xl p-8 shadow-sm">
+            <div className="bg-[#E8DFD2] border border-[#E4DACC] rounded-xl p-8 shadow-sm">
               <AuditForm />
             </div>
           </div>

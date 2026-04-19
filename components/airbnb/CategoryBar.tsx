@@ -1,7 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Globe, LayoutDashboard, Zap, Search, Sparkles, UtensilsCrossed, Hammer, Wine, BedDouble, ShoppingBag, Grid3X3, SlidersHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Globe, LayoutDashboard, Zap, Search, Sparkles,
+  UtensilsCrossed, Hammer, Wine, BedDouble, ShoppingBag, Grid3X3,
+  ChevronLeft, ChevronRight,
+} from "lucide-react";
 
 const categories = [
   { label: "Websites", icon: Globe },
@@ -26,6 +30,11 @@ export default function CategoryBar() {
     scrollRef.current.scrollBy({ left: dir === "right" ? 200 : -200, behavior: "smooth" });
   };
 
+  const handleCategoryClick = (label: string) => {
+    setActive(label);
+    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="sticky top-20 z-40 bg-[#F5F0E8] border-b border-[#E4DACC] py-4">
       <div className="relative flex items-center px-10 gap-4">
@@ -48,7 +57,7 @@ export default function CategoryBar() {
             return (
               <button
                 key={label}
-                onClick={() => setActive(label)}
+                onClick={() => handleCategoryClick(label)}
                 className={`flex flex-col items-center gap-1.5 w-20 shrink-0 pb-4 -mb-4 transition-all ${
                   isActive
                     ? "text-[#1F1A16] border-b-2 border-[#1F1A16]"
@@ -69,12 +78,6 @@ export default function CategoryBar() {
           aria-label="Scroll right"
         >
           <ChevronRight size={16} className="text-[#1F1A16]" />
-        </button>
-
-        {/* Filters button */}
-        <button className="shrink-0 flex items-center gap-2 border border-[#E4DACC] rounded-full px-4 py-2 text-xs font-medium text-[#1F1A16] hover:shadow-md transition-shadow bg-[#F5F0E8]">
-          <SlidersHorizontal size={14} />
-          Filters
         </button>
       </div>
     </div>
