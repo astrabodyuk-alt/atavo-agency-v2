@@ -29,7 +29,7 @@ export type Service = {
   description: string;
   priceFrom: number;
   image: string;
-  badge?: "Most popular" | "Best for SEO" | "Cross-niche";
+  badge?: "Essential" | "Best for SEO" | "Most popular";
 };
 
 const Q = "?w=800&q=80&auto=format&fit=crop";
@@ -46,7 +46,6 @@ export const SERVICES: Service[] = [
       "Brand-led website with booking CTA, photo gallery, team bios and local SEO.",
     priceFrom: 790,
     image: U("photo-1560066984-138dadb4c035"),
-    badge: "Best for SEO",
   },
   {
     id: "beauty-booking",
@@ -57,7 +56,7 @@ export const SERVICES: Service[] = [
       "Custom booking with automated reminders, deposit capture, and calendar sync.",
     priceFrom: 800,
     image: U("photo-1611926653458-09294b3142bf"),
-    badge: "Most popular",
+    badge: "Essential",
   },
   {
     id: "beauty-loyalty",
@@ -88,6 +87,7 @@ export const SERVICES: Service[] = [
       "Smart assistant that handles pricing, availability and booking questions 24/7.",
     priceFrom: 350,
     image: U("photo-1611746872915-64382b5c76da"),
+    badge: "Essential",
   },
   {
     id: "beauty-reviews",
@@ -110,7 +110,6 @@ export const SERVICES: Service[] = [
       "Cinematic website with menu, hours, gallery, and Google Maps integration.",
     priceFrom: 790,
     image: U("photo-1517248135467-4c7edcad34c4"),
-    badge: "Best for SEO",
   },
   {
     id: "food-reservation",
@@ -121,7 +120,7 @@ export const SERVICES: Service[] = [
       "Self-service booking with no-show deposit and automated confirmations.",
     priceFrom: 800,
     image: U("photo-1414235077428-338989a2e8c0"),
-    badge: "Most popular",
+    badge: "Essential",
   },
   {
     id: "food-qr-menu",
@@ -174,7 +173,6 @@ export const SERVICES: Service[] = [
       "Trust-first website with accreditations, before/after gallery, and lead capture form.",
     priceFrom: 790,
     image: U("photo-1504307651254-35680f356dfd"),
-    badge: "Best for SEO",
   },
   {
     id: "trades-quote-form",
@@ -185,7 +183,6 @@ export const SERVICES: Service[] = [
       "Smart multi-step form that qualifies leads and auto-sends a quote estimate by email.",
     priceFrom: 450,
     image: U("photo-1581092795360-fd1ca04f0952"),
-    badge: "Most popular",
   },
   {
     id: "trades-availability",
@@ -238,7 +235,6 @@ export const SERVICES: Service[] = [
       "Atmospheric website with seasonal menus, event calendar, and online ordering.",
     priceFrom: 790,
     image: U("photo-1510812431401-41d2bd2722f3"),
-    badge: "Best for SEO",
   },
   {
     id: "beverage-ordering",
@@ -269,7 +265,6 @@ export const SERVICES: Service[] = [
       "Digital membership with exclusive access, early releases, and member-only pricing.",
     priceFrom: 800,
     image: U("photo-1543364195-bfe6e4932397"),
-    badge: "Most popular",
   },
   {
     id: "beverage-whatsapp",
@@ -302,7 +297,6 @@ export const SERVICES: Service[] = [
       "Full property website with room showcase, direct booking, and local attractions guide.",
     priceFrom: 1490,
     image: U("photo-1566073771259-6a8506099945"),
-    badge: "Best for SEO",
   },
   {
     id: "hospitality-booking",
@@ -313,7 +307,6 @@ export const SERVICES: Service[] = [
       "Commission-free booking widget that beats OTA rates and handles payment.",
     priceFrom: 1200,
     image: U("photo-1520250497591-112f2f40a3f4"),
-    badge: "Most popular",
   },
   {
     id: "hospitality-upsell",
@@ -366,7 +359,6 @@ export const SERVICES: Service[] = [
       "Conversion-tuned storefront with brand story, lookbook, and fast checkout.",
     priceFrom: 1490,
     image: U("photo-1556228578-8c89e6adf883"),
-    badge: "Best for SEO",
   },
   {
     id: "ecommerce-abandoned",
@@ -377,7 +369,6 @@ export const SERVICES: Service[] = [
       "Automated 3-step email sequence that recovers 15–25% of lost sales.",
     priceFrom: 400,
     image: U("photo-1561069934-eee225952461"),
-    badge: "Most popular",
   },
   {
     id: "ecommerce-loyalty",
@@ -430,7 +421,6 @@ export const SERVICES: Service[] = [
       "Artisan website with commission flow, process gallery, and waitlist signup.",
     priceFrom: 790,
     image: U("photo-1487530811015-780c5c89d034"),
-    badge: "Best for SEO",
   },
   {
     id: "craft-commission",
@@ -441,7 +431,6 @@ export const SERVICES: Service[] = [
       "Multi-step form that qualifies commission requests and auto-sends a pricing guide.",
     priceFrom: 450,
     image: U("photo-1452860606245-08befc0ff44b"),
-    badge: "Most popular",
   },
   {
     id: "craft-waitlist",
@@ -494,7 +483,6 @@ export const SERVICES: Service[] = [
       "Full-screen portfolio with contact form, availability calendar, and client area.",
     priceFrom: 790,
     image: U("photo-1542038784456-1ea8e935640e"),
-    badge: "Best for SEO",
   },
   {
     id: "studio-booking",
@@ -505,7 +493,6 @@ export const SERVICES: Service[] = [
       "Package-based booking with deposit, brief questionnaire, and automated prep guide.",
     priceFrom: 700,
     image: U("photo-1611926653458-09294b3142bf"),
-    badge: "Most popular",
   },
   {
     id: "studio-gallery",
@@ -558,7 +545,6 @@ export const SERVICES: Service[] = [
       "Brand-forward site with lookbook, store locator, and new-arrival email signup.",
     priceFrom: 1490,
     image: U("photo-1441984904996-e0b6ba687e04"),
-    badge: "Best for SEO",
   },
   {
     id: "retail-ecommerce",
@@ -569,7 +555,6 @@ export const SERVICES: Service[] = [
       "Lightweight online shop with in-store pickup — perfect for small-batch retailers.",
     priceFrom: 900,
     image: U("photo-1472851294608-062f824d29cc"),
-    badge: "Most popular",
   },
   {
     id: "retail-loyalty",
@@ -622,7 +607,6 @@ export const SERVICES: Service[] = [
       "Calm, trust-first website with class schedule, instructor bios, and trial signup.",
     priceFrom: 790,
     image: U("photo-1545205597-3d9d02c29597"),
-    badge: "Best for SEO",
   },
   {
     id: "wellness-booking",
@@ -633,7 +617,6 @@ export const SERVICES: Service[] = [
       "Drop-in and membership booking with waitlists, reminders, and cancellation handling.",
     priceFrom: 800,
     image: U("photo-1611926653458-09294b3142bf"),
-    badge: "Most popular",
   },
   {
     id: "wellness-membership",
@@ -686,7 +669,7 @@ export const SERVICES: Service[] = [
       "Universal review engine — auto-requests Google reviews at the right moment for any business type.",
     priceFrom: 299,
     image: U("photo-1556742111-a301076d9d18"),
-    badge: "Cross-niche",
+    badge: "Best for SEO",
   },
 ];
 

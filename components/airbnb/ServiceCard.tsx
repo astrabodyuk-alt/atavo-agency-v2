@@ -11,6 +11,12 @@ export default function ServiceCard({ service }: Props) {
   const inCart = items.some((i) => i.id === service.id);
   const { Icon } = service;
 
+  const badgeStyles: Record<NonNullable<Service["badge"]>, string> = {
+    Essential:      "bg-[#C9A875] text-[#1F1A16]",
+    "Best for SEO": "bg-[#1F1A16] text-[#C9A875]",
+    "Most popular": "bg-[#1F1A16] text-[#F5F0E8]",
+  };
+
   return (
     <article className="group flex flex-col">
       {/* Image — 4:3, rounded, hover zoom */}
@@ -24,7 +30,9 @@ export default function ServiceCard({ service }: Props) {
         />
         {/* Badge — top left */}
         {service.badge && (
-          <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-medium uppercase tracking-wide bg-[#1F1A16] text-[#C9A875]">
+          <span
+            className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-medium uppercase tracking-[0.08em] ${badgeStyles[service.badge]}`}
+          >
             {service.badge}
           </span>
         )}
