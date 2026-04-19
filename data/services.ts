@@ -89,17 +89,6 @@ export const SERVICES: Service[] = [
     image: U("photo-1611746872915-64382b5c76da"),
     badge: "Essential",
   },
-  {
-    id: "beauty-reviews",
-    niche: "beauty",
-    title: "Review collection",
-    Icon: Star,
-    description:
-      "Automated Google review requests sent 48h after each visit.",
-    priceFrom: 300,
-    image: U("photo-1556742111-a301076d9d18"),
-  },
-
   // ─── FOOD ─────────────────────────────────────────────────────────────────
   {
     id: "food-website",
@@ -666,8 +655,8 @@ export const SERVICES: Service[] = [
     title: "Google Reviews Automation",
     Icon: TrendingUp,
     description:
-      "Universal review engine — auto-requests Google reviews at the right moment for any business type.",
-    priceFrom: 299,
+      "Automated review requests sent via SMS, WhatsApp & email after each visit. Custom QR code for in-store signage. Auto follow-up at day 3. More reviews = higher Google ranking = more customers.",
+    priceFrom: 390,
     image: U("photo-1556742111-a301076d9d18"),
     badge: "Best for SEO",
   },
