@@ -3,7 +3,6 @@ import { Check } from "lucide-react";
 import AirbnbHeader from "@/components/airbnb/Header";
 import CategoryBar from "@/components/airbnb/CategoryBar";
 import HeroBanner from "@/components/airbnb/HeroBanner";
-import ListingGrid from "@/components/airbnb/ListingGrid";
 import Services from "@/components/airbnb/Services";
 import AirbnbFooter from "@/components/airbnb/Footer";
 import AuditForm from "@/components/airbnb/AuditForm";
@@ -69,11 +68,6 @@ export default function Home() {
       <main className="bg-[#F5F0E8]">
         {/* Hero */}
         <HeroBanner />
-
-        {/* Selected work — filterable by niche */}
-        <div id="work">
-          <ListingGrid />
-        </div>
 
         {/* Services — 2x2 discipline cards */}
         <Services />

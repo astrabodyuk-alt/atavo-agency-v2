@@ -13,6 +13,18 @@ export default function AuditForm() {
 
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
+  // On mount: handle return from /build/[niche] with cart items pre-filled
+  useEffect(() => {
+    if (!cartMessage) return;
+    setMessage(cartMessage);
+    setCartMessage(null);
+    setTimeout(() => {
+      document.getElementById("audit")?.scrollIntoView({ behavior: "smooth" });
+      const ta = messageRef.current;
+      if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }
+    }, 400);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     if (submitTrigger === 0) return;
 
