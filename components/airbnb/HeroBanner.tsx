@@ -20,7 +20,7 @@ export default function HeroBanner() {
           Your competitors are online. Are you?
         </h1>
         <p className="text-[#F5F0E8]/80 text-lg max-w-xl mb-8">
-          Bespoke websites, SaaS and automation. Delivered in 10 days.
+          Bespoke websites, SaaS and automation for businesses that want to grow. Quietly.
         </p>
         <Link
           href="#audit"

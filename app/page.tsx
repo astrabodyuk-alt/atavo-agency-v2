@@ -10,38 +10,35 @@ import AuditForm from "@/components/airbnb/AuditForm";
 
 const pricingCards = [
   {
-    label: "Audit",
-    price: "Free",
-    duration: "72 hours",
+    label: "Essential",
+    price: "Landing page or audit",
     featured: false,
     items: [
-      "Your Google visibility in your postcode",
-      "Your site measured against your top three",
-      "Your Google Business profile, line by line",
-      "One quiet upgrade for this week",
+      "One focused page or a full audit",
+      "Google Business Profile setup",
+      "Local SEO baseline",
+      "One round of revisions",
     ],
     cta: "Send AUDIT in DM",
   },
   {
-    label: "Site",
-    price: "From £1,500",
-    duration: "10 days",
+    label: "Studio",
+    price: "Full website",
     featured: false,
     items: [
       "Bespoke site in the voice of your business",
-      "Google Business Profile setup",
-      "Local SEO on your postcode",
-      "Three revisions",
+      "Copywriting, design and SEO included",
+      "Google Business Profile optimised",
+      "Three rounds of revisions",
     ],
     cta: "Book a call",
   },
   {
-    label: "Site + SaaS",
-    price: "From £3,000",
-    duration: "14 days",
+    label: "Atelier",
+    price: "Website + SaaS / automation",
     featured: true,
     items: [
-      "Everything in Site",
+      "Everything in Studio",
       "WhatsApp / email auto-reply assistant",
       "Birthday and loyalty automations",
       "Three months of quiet maintenance",
@@ -107,8 +104,7 @@ export default function Home() {
                   </span>
                 )}
                 <p className="uppercase tracking-wider text-xs text-[#8A7B6C] mb-4">{card.label}</p>
-                <p className="font-display font-light text-4xl text-[#1F1A16] mb-1">{card.price}</p>
-                <p className="text-[#8A7B6C] text-sm mb-8">{card.duration}</p>
+                <p className="font-display font-light text-2xl text-[#1F1A16] mb-8">{card.price}</p>
                 <ul className="flex flex-col gap-3 mb-8 flex-1">
                   {card.items.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-[#8A7B6C]">
@@ -130,6 +126,9 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <p className="mt-8 text-[#8A7B6C] text-xs max-w-lg">
+            Rush delivery available on request — adds £200–£500 depending on scope. Discuss during your audit call.
+          </p>
         </section>
 
         {/* Audit Form */}
@@ -140,7 +139,7 @@ export default function Home() {
                 Book your free business audit.
               </h2>
               <p className="text-[#8A7B6C] leading-relaxed mb-6">
-                Three quick questions. Then a 20-minute call. Then a written audit in your inbox within 72 hours. No pitch, no obligation.
+                Three quick questions. Then a 20-minute call. Then a written audit in your inbox. No pitch, no obligation.
               </p>
               <p className="text-[#8A7B6C] text-sm">Available Monday to Friday &middot; UK time</p>
 

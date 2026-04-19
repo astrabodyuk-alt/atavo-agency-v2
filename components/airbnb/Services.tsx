@@ -4,37 +4,37 @@ import { Globe, LayoutDashboard, Zap, Search, Check } from "lucide-react";
 const cards = [
   {
     icon: Globe,
-    title: "Websites.",
+    title: "Websites",
     tagline: "Built to pour the right glass.",
-    body: "Bespoke sites in the voice of your business. Google Business profile, local SEO on your postcode, three revisions. Delivered in 10 days.",
-    price: "From £1,500",
+    body: "Conversion-first websites for brands that want to grow quietly. Copywriting, design, SEO — all hand-crafted.",
+    price: "On scope",
     featured: false,
     badge: null,
   },
   {
     icon: LayoutDashboard,
-    title: "SaaS.",
+    title: "SaaS",
     tagline: "A quiet assistant that never forgets.",
-    body: "WhatsApp and email auto-reply. Birthday and loyalty automations. Private event routing. The engine that keeps them coming back.",
-    price: "From £3,000",
+    body: "Custom internal tools and client-facing platforms. Built to replace spreadsheets, emails and manual chaos.",
+    price: "On scope",
     featured: false,
     badge: null,
   },
   {
     icon: Zap,
-    title: "Automation.",
+    title: "Automation",
     tagline: "Your Make.com workshop.",
-    body: "Book + notify + nudge. Connect your CRM, your calendar, your inbox. Automations that save four to six hours a week.",
-    price: "From £900",
+    body: "Workflows that run your business in the background. Lead capture, follow-ups, reporting — set once, forever silent.",
+    price: "On scope",
     featured: false,
     badge: null,
   },
   {
     icon: Search,
-    title: "Audits.",
+    title: "Audits",
     tagline: "A deep reading, before anything.",
-    body: "Your Google visibility, your site measured against your top three, your GMB profile line by line. One quiet upgrade for this week.",
-    price: "Free · 72h",
+    body: "A 72h strategic read of your current site. What is broken, what is leaking revenue, what to fix first.",
+    price: "Free",
     featured: true,
     badge: "Start here",
   },
@@ -119,7 +119,7 @@ export default function Services() {
         >
           Send AUDIT in DM
         </Link>
-        <span className="text-[#8A7B6C] text-sm">Free · delivered in 72 hours</span>
+        <span className="text-[#8A7B6C] text-sm">Free. No pitch.</span>
       </div>
     </section>
   );

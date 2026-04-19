@@ -7,7 +7,7 @@ const services = [
   { name: "Websites", sub: "Bespoke build", icon: Globe },
   { name: "SaaS", sub: "Dashboards and MVPs", icon: LayoutDashboard },
   { name: "Automation", sub: "Make & n8n", icon: Zap },
-  { name: "SEO Audit", sub: "72h delivery", icon: Search },
+  { name: "SEO Audit", sub: "Strategic read", icon: Search },
   { name: "Branding", sub: "Logo + palette", icon: Tag },
   { name: "Copy", sub: "Site + email", icon: FileText },
 ];
