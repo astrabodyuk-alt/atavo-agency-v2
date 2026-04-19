@@ -5,8 +5,6 @@ import { X } from "lucide-react";
 import { type Service } from "@/data/services";
 import { useCart } from "@/stores/cartStore";
 import { useSearchStore } from "@/lib/searchStore";
-import KlarnaLabel from "./KlarnaLabel";
-
 type Props = { service: Service };
 
 const badgeStyles: Record<NonNullable<Service["badge"]>, string> = {
@@ -34,30 +32,17 @@ export default function ServiceCard({ service }: Props) {
 
   // ─── Price block ──────────────────────────────────────────────────────────
   let primaryPrice: string;
-  let subLine: React.ReactNode = null;
+  let priceTag: string | null = null;
 
-  if (pricing.type === "managed") {
-    if (billingMode === "monthly") {
-      primaryPrice = `From £${pricing.monthly}/mo`;
-      subLine = (
-        <p className="text-xs text-[#8A7B6C] italic mt-0.5">
-          or £{pricing.oneOff.toLocaleString("en-GB")} one-off setup
-        </p>
-      );
+  if (billingMode === "monthly") {
+    if (pricing.type === "managed") {
+      primaryPrice = `From £${pricing.monthly}/month`;
     } else {
       primaryPrice = `From £${pricing.oneOff.toLocaleString("en-GB")}`;
-      subLine = (
-        <p className="text-xs text-[#8A7B6C] mt-0.5">
-          or £{pricing.monthly}/month (managed)
-        </p>
-      );
+      priceTag = "One-off project";
     }
   } else {
-    // build or oneoff
     primaryPrice = `From £${pricing.oneOff.toLocaleString("en-GB")}`;
-    if (pricing.type === "build") {
-      subLine = <KlarnaLabel />;
-    }
   }
 
   return (
@@ -102,11 +87,13 @@ export default function ServiceCard({ service }: Props) {
             />
             <span>{service.title}</span>
           </h3>
-          <div className="text-right shrink-0">
+          <div className="text-right shrink-0 flex flex-col items-end">
             <span className="font-display font-light text-base text-[#1F1A16] whitespace-nowrap">
               {primaryPrice}
             </span>
-            {subLine}
+            {priceTag && (
+              <span className="text-xs text-[#8A7B6C] italic">{priceTag}</span>
+            )}
           </div>
         </div>
 
