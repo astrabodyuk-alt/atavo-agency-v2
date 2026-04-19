@@ -1,28 +1,28 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
-  Globe, LayoutDashboard, Zap, Search, Sparkles,
-  UtensilsCrossed, Hammer, Wine, BedDouble, ShoppingBag, Grid3X3,
+  Sparkles, UtensilsCrossed, Hammer, Wine, BedDouble,
+  ShoppingBag, Wrench, Camera, Tag, Heart,
   ChevronLeft, ChevronRight,
 } from "lucide-react";
+import { useSearchStore } from "@/lib/searchStore";
 
-const categories = [
-  { label: "Websites", icon: Globe },
-  { label: "SaaS", icon: LayoutDashboard },
-  { label: "Automation", icon: Zap },
-  { label: "Audits", icon: Search },
-  { label: "Beauty", icon: Sparkles },
-  { label: "Food", icon: UtensilsCrossed },
-  { label: "Trades", icon: Hammer },
-  { label: "Beverage", icon: Wine },
-  { label: "Hospitality", icon: BedDouble },
-  { label: "E-commerce", icon: ShoppingBag },
-  { label: "All", icon: Grid3X3 },
+const niches = [
+  { key: "beauty",      label: "Beauty",      icon: Sparkles },
+  { key: "food",        label: "Food",         icon: UtensilsCrossed },
+  { key: "trades",      label: "Trades",       icon: Hammer },
+  { key: "beverage",    label: "Beverage",     icon: Wine },
+  { key: "hospitality", label: "Hospitality",  icon: BedDouble },
+  { key: "ecommerce",   label: "E-commerce",   icon: ShoppingBag },
+  { key: "craft",       label: "Craft",        icon: Wrench },
+  { key: "studio",      label: "Studio",       icon: Camera },
+  { key: "retail",      label: "Retail",       icon: Tag },
+  { key: "wellness",    label: "Wellness",     icon: Heart },
 ];
 
 export default function CategoryBar() {
-  const [active, setActive] = useState("Websites");
+  const { selectedNiche, setSelectedNiche } = useSearchStore();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: "left" | "right") => {
@@ -30,14 +30,15 @@ export default function CategoryBar() {
     scrollRef.current.scrollBy({ left: dir === "right" ? 200 : -200, behavior: "smooth" });
   };
 
-  const handleCategoryClick = (label: string) => {
-    setActive(label);
+  const handleClick = (key: string) => {
+    // Toggle: clicking the active niche clears the filter
+    setSelectedNiche(selectedNiche === key ? null : key);
     document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="sticky top-20 z-40 bg-[#F5F0E8] border-b border-[#E4DACC] py-4">
-      <div className="relative flex items-center px-10 gap-4">
+      <div className="flex items-center px-10 gap-4">
         {/* Left arrow */}
         <button
           onClick={() => scroll("left")}
@@ -47,20 +48,20 @@ export default function CategoryBar() {
           <ChevronLeft size={16} className="text-[#1F1A16]" />
         </button>
 
-        {/* Category items */}
+        {/* Niche pills */}
         <div
           ref={scrollRef}
           className="flex items-center gap-8 overflow-x-auto scrollbar-hide flex-1"
         >
-          {categories.map(({ label, icon: Icon }) => {
-            const isActive = active === label;
+          {niches.map(({ key, label, icon: Icon }) => {
+            const isActive = selectedNiche === key;
             return (
               <button
-                key={label}
-                onClick={() => handleCategoryClick(label)}
+                key={key}
+                onClick={() => handleClick(key)}
                 className={`flex flex-col items-center gap-1.5 w-20 shrink-0 pb-4 -mb-4 transition-all ${
                   isActive
-                    ? "text-[#1F1A16] border-b-2 border-[#1F1A16]"
+                    ? "text-[#1F1A16] border-b-2 border-[#C9A875]"
                     : "text-[#8A7B6C] hover:text-[#1F1A16] border-b-2 border-transparent"
                 }`}
               >

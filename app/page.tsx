@@ -1,41 +1,12 @@
 import Link from "next/link";
-import { Check, Compass, Search, Target, Globe, LayoutDashboard, Zap, Tag, FileText } from "lucide-react";
+import { Check } from "lucide-react";
 import AirbnbHeader from "@/components/airbnb/Header";
 import CategoryBar from "@/components/airbnb/CategoryBar";
 import HeroBanner from "@/components/airbnb/HeroBanner";
 import ListingGrid from "@/components/airbnb/ListingGrid";
+import Services from "@/components/airbnb/Services";
 import AirbnbFooter from "@/components/airbnb/Footer";
 import AuditForm from "@/components/airbnb/AuditForm";
-
-const services = [
-  { name: "Websites", sub: "Bespoke build", icon: Globe },
-  { name: "SaaS", sub: "Dashboards and MVPs", icon: LayoutDashboard },
-  { name: "Automation", sub: "Make & n8n", icon: Zap },
-  { name: "SEO Audit", sub: "72h delivery", icon: Search },
-  { name: "Branding", sub: "Logo + palette", icon: Tag },
-  { name: "Copy", sub: "Site + email", icon: FileText },
-];
-
-const method = [
-  {
-    icon: Compass,
-    num: "01",
-    title: "Business deep-dive",
-    desc: "Before a pixel, we map your offer, your margins, your buyer. A site that does not know its buyer is a brochure with a URL.",
-  },
-  {
-    icon: Search,
-    num: "02",
-    title: "Competitor intelligence",
-    desc: "We audit the 5 businesses fighting you for the same keywords. Then we build something they cannot copy in a weekend.",
-  },
-  {
-    icon: Target,
-    num: "03",
-    title: "Strategic positioning",
-    desc: "Every section, every button, every photograph earns its spot. No filler. No stock-feeling hero video. Clear position, clear ask.",
-  },
-];
 
 const pricingCards = [
   {
@@ -89,55 +60,13 @@ export default function Home() {
         {/* Hero */}
         <HeroBanner />
 
-        {/* Work */}
+        {/* Selected work — filterable by niche */}
         <div id="work">
           <ListingGrid />
         </div>
 
-        {/* Services — merged rail + method */}
-        <section id="services" className="py-20 px-10 bg-[#E8DFD2]">
-          <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">Services</span>
-          <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-2">
-            What we build.
-          </h2>
-          <p className="text-[#8A7B6C] text-base mb-12">
-            Websites that sell. SaaS that retains. Audits that reveal.
-          </p>
-
-          {/* Service cards — scrollable row */}
-          <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 mb-16">
-            {services.map(({ name, sub, icon: Icon }) => (
-              <Link
-                href="#audit"
-                key={name}
-                className="w-64 flex-shrink-0 h-24 rounded-xl bg-[#F5F0E8] border border-[#E4DACC] px-5 flex items-center gap-4 hover:shadow-md transition-shadow"
-              >
-                <div className="h-14 w-14 rounded-md bg-[#1F1A16]/5 flex items-center justify-center shrink-0">
-                  <Icon size={22} className="text-[#1F1A16]" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-[#1F1A16]">{name}</p>
-                  <p className="text-xs text-[#8A7B6C]">{sub}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Method steps */}
-          <div className="grid md:grid-cols-3 gap-8 border-t border-[#E4DACC] pt-12">
-            {method.map(({ icon: Icon, num, title, desc }) => (
-              <div key={num}>
-                <div className="h-12 w-12 rounded-full bg-[#F5F0E8] flex items-center justify-center mb-4">
-                  <Icon size={20} className="text-[#1F1A16]" />
-                </div>
-                <h3 className="font-display font-light text-[#1F1A16] text-xl mb-2">
-                  {num} {title}
-                </h3>
-                <p className="text-[#8A7B6C] text-sm leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Services — 2x2 discipline cards */}
+        <Services />
 
         {/* About — The Studio */}
         <section id="about" className="py-20 px-10 bg-[#F5F0E8]">
@@ -166,9 +95,9 @@ export default function Home() {
             {pricingCards.map((card) => (
               <div
                 key={card.label}
-                className={`rounded-xl p-8 flex flex-col ${
+                className={`rounded-xl p-8 flex flex-col relative ${
                   card.featured
-                    ? "bg-[#E8DFD2] border-2 border-[#C9A875] relative"
+                    ? "bg-[#E8DFD2] border-2 border-[#C9A875]"
                     : "bg-[#F5F0E8] border border-[#E4DACC]"
                 }`}
               >
