@@ -11,37 +11,49 @@ import AuditForm from "@/components/airbnb/AuditForm";
 const pricingCards = [
   {
     label: "Essential",
-    price: "Landing page or audit",
+    title: "Landing page",
+    price: "£790",
+    subPrice: "one-time",
     featured: false,
+    badge: null,
     items: [
-      "One focused page or a full audit",
-      "Google Business Profile setup",
-      "Local SEO baseline",
-      "One round of revisions",
+      { text: "Full Business Intelligence Report (£499 value · included)", anchor: true },
+      { text: "One focused landing page", anchor: false },
+      { text: "Google Business Profile setup", anchor: false },
+      { text: "Local SEO baseline", anchor: false },
+      { text: "One round of revisions", anchor: false },
     ],
-    cta: "Send AUDIT in DM",
+    cta: "Book a call",
   },
   {
     label: "Studio",
-    price: "Full website",
-    featured: false,
+    title: "Full website",
+    price: "£1,490",
+    subPrice: "one-time",
+    featured: true,
+    badge: "Most chosen",
     items: [
-      "Bespoke site in the voice of your business",
-      "Copywriting, design and SEO included",
-      "Google Business Profile optimised",
-      "Three rounds of revisions",
+      { text: "Full Business Intelligence Report (£499 value · included)", anchor: true },
+      { text: "Bespoke site in the voice of your business", anchor: false },
+      { text: "Copywriting, design and SEO included", anchor: false },
+      { text: "Google Business Profile optimised", anchor: false },
+      { text: "Three rounds of revisions", anchor: false },
     ],
     cta: "Book a call",
   },
   {
     label: "Atelier",
-    price: "Website + SaaS / automation",
-    featured: true,
+    title: "Website + SaaS / automation",
+    price: "From £3,500",
+    subPrice: "Bespoke quote",
+    featured: false,
+    badge: "Best value",
     items: [
-      "Everything in Studio",
-      "WhatsApp / email auto-reply assistant",
-      "Birthday and loyalty automations",
-      "Three months of quiet maintenance",
+      { text: "Full Business Intelligence Report (£499 value · included)", anchor: true },
+      { text: "Everything in Studio", anchor: false },
+      { text: "WhatsApp / email auto-reply assistant", anchor: false },
+      { text: "Birthday and loyalty automations", anchor: false },
+      { text: "Three months of quiet maintenance", anchor: false },
     ],
     cta: "Book a call",
   },
@@ -82,42 +94,75 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Pricing — 3 cards */}
+        {/* Pricing */}
         <section id="pricing" className="py-20 px-10 bg-[#E8DFD2]">
           <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">Pricing</span>
-          <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-12">
+          <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-4">
             Three ways in.
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl">
+
+          {/* Value anchor line */}
+          <p className="italic text-[#8A7B6C] text-sm mb-12 max-w-xl">
+            Every paid tier includes our Full Business Intelligence Report — a £499 value, included.
+          </p>
+
+          {/* 3 cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mb-8">
             {pricingCards.map((card) => (
               <div
                 key={card.label}
                 className={`rounded-xl p-8 flex flex-col relative ${
                   card.featured
-                    ? "bg-[#E8DFD2] border-2 border-[#C9A875]"
+                    ? "bg-[#1F1A16] text-[#F5F0E8] border-2 border-[#1F1A16]"
                     : "bg-[#F5F0E8] border border-[#E4DACC]"
                 }`}
               >
-                {card.featured && (
+                {card.badge && (
                   <span className="absolute top-5 right-5 bg-[#C9A875] text-[#1F1A16] text-xs font-semibold px-2 py-1 rounded-md">
-                    Best value
+                    {card.badge}
                   </span>
                 )}
-                <p className="uppercase tracking-wider text-xs text-[#8A7B6C] mb-4">{card.label}</p>
-                <p className="font-display font-light text-2xl text-[#1F1A16] mb-8">{card.price}</p>
+
+                <p className={`uppercase tracking-wider text-xs mb-3 ${card.featured ? "text-[#F5F0E8]/50" : "text-[#8A7B6C]"}`}>
+                  {card.label}
+                </p>
+                <p className={`font-display font-light text-xl mb-1 ${card.featured ? "text-[#F5F0E8]" : "text-[#1F1A16]"}`}>
+                  {card.title}
+                </p>
+                <div className="flex items-baseline gap-2 mb-8">
+                  <span className={`font-display font-light text-3xl ${card.featured ? "text-[#F5F0E8]" : "text-[#1F1A16]"}`}>
+                    {card.price}
+                  </span>
+                  <span className={`text-xs ${card.featured ? "text-[#F5F0E8]/50" : "text-[#8A7B6C]"}`}>
+                    {card.subPrice}
+                  </span>
+                </div>
+
                 <ul className="flex flex-col gap-3 mb-8 flex-1">
                   {card.items.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-[#8A7B6C]">
-                      <Check size={15} className="text-[#C9A875] mt-0.5 shrink-0" />
-                      {item}
+                    <li key={item.text} className="flex items-start gap-3 text-sm">
+                      <Check
+                        size={15}
+                        className="text-[#C9A875] mt-0.5 shrink-0"
+                      />
+                      {item.anchor ? (
+                        <span className={`font-medium ${card.featured ? "text-[#C9A875]" : "text-[#1F1A16]"}`}>
+                          {item.text}
+                        </span>
+                      ) : (
+                        <span className={card.featured ? "text-[#F5F0E8]/70" : "text-[#8A7B6C]"}>
+                          {item.text}
+                        </span>
+                      )}
                     </li>
                   ))}
                 </ul>
+
                 <Link
                   href="#audit"
                   className={`block text-center rounded-sm py-3 text-sm font-medium transition-colors ${
                     card.featured
-                      ? "bg-[#1F1A16] text-[#F5F0E8] hover:bg-[#1F1A16]/90"
+                      ? "bg-[#C9A875] text-[#1F1A16] hover:bg-[#B8996A]"
                       : "border border-[#1F1A16] text-[#1F1A16] hover:bg-[#1F1A16] hover:text-[#F5F0E8]"
                   }`}
                 >
@@ -126,9 +171,34 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="mt-8 text-[#8A7B6C] text-xs max-w-lg">
-            Rush delivery available on request — adds £200–£500 depending on scope. Discuss during your audit call.
-          </p>
+
+          {/* Just the audit? */}
+          <div className="max-w-5xl bg-[#F5F0E8] border border-[#E4DACC] rounded-xl p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <p className="font-display font-light text-[#1F1A16] text-xl mb-1">
+                Just want the audit?
+              </p>
+              <p className="text-[#1F1A16] font-medium text-sm mb-2">
+                Full Business Intelligence Report &middot; £499
+              </p>
+              <p className="text-[#8A7B6C] text-sm max-w-lg">
+                Complete SEO audit, competitor analysis, 90-day action plan. If you commission a website within 30 days, the £499 is deducted from your total.
+              </p>
+            </div>
+            <Link
+              href="#audit"
+              className="shrink-0 inline-flex items-center border border-[#1F1A16] text-[#1F1A16] rounded-sm px-6 py-3 text-sm font-medium hover:bg-[#1F1A16] hover:text-[#F5F0E8] transition-colors whitespace-nowrap"
+            >
+              Order the audit
+            </Link>
+          </div>
+
+          {/* Footnotes */}
+          <div className="mt-6 flex flex-col gap-1.5 max-w-lg">
+            <p className="text-[#8A7B6C] text-xs">
+              Rush delivery available on request — adds £200–£500 depending on scope. Discuss during your call.
+            </p>
+          </div>
         </section>
 
         {/* Audit Form */}
@@ -136,10 +206,13 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 max-w-6xl">
             <div>
               <h2 className="font-display font-light text-4xl text-[#1F1A16] mb-4">
-                Book your free business audit.
+                Start with a free quick scan.
               </h2>
-              <p className="text-[#8A7B6C] leading-relaxed mb-6">
-                Three quick questions. Then a 20-minute call. Then a written audit in your inbox. No pitch, no obligation.
+              <p className="text-[#8A7B6C] leading-relaxed mb-3">
+                Tell us about your business. We send back 3–5 concrete wins on your current site, via email. No call required. No pitch.
+              </p>
+              <p className="text-[#8A7B6C] text-xs italic mb-6">
+                Free Quick Scan &middot; 3–5 wins on your current site, delivered in 72h.
               </p>
               <p className="text-[#8A7B6C] text-sm">Available Monday to Friday &middot; UK time</p>
 
