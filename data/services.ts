@@ -21,15 +21,20 @@ export type Niche =
   | "retail"
   | "wellness";
 
+export type Pricing =
+  | { type: "managed"; monthly: number; oneOff: number }
+  | { type: "build"; oneOff: number; klarna: true }
+  | { type: "oneoff"; oneOff: number };
+
 export type Service = {
   id: string;
   niche: Niche | Niche[];
   title: string;
   Icon: LucideIcon;
   description: string;
-  priceFrom: number;
   image: string;
-  badge?: "Essential" | "Best for SEO" | "Most popular";
+  badge?: "Essential" | "Best for SEO" | "Most chosen";
+  pricing: Pricing;
 };
 
 const Q = "?w=800&q=80&auto=format&fit=crop";
@@ -44,8 +49,8 @@ export const SERVICES: Service[] = [
     Icon: Sparkles,
     description:
       "Brand-led website with booking CTA, photo gallery, team bios and local SEO.",
-    priceFrom: 790,
     image: U("photo-1560066984-138dadb4c035"),
+    pricing: { type: "build", oneOff: 790, klarna: true },
   },
   {
     id: "beauty-booking",
@@ -54,9 +59,9 @@ export const SERVICES: Service[] = [
     Icon: CalendarCheck,
     description:
       "Custom booking with automated reminders, deposit capture, and calendar sync.",
-    priceFrom: 800,
     image: U("photo-1611926653458-09294b3142bf"),
     badge: "Essential",
+    pricing: { type: "managed", monthly: 89, oneOff: 800 },
   },
   {
     id: "beauty-loyalty",
@@ -65,8 +70,8 @@ export const SERVICES: Service[] = [
     Icon: Gift,
     description:
       "Digital loyalty punch card and gift voucher system that drives repeat visits.",
-    priceFrom: 450,
     image: U("photo-1607344645866-009c320b63e0"),
+    pricing: { type: "managed", monthly: 49, oneOff: 450 },
   },
   {
     id: "beauty-birthday",
@@ -75,8 +80,8 @@ export const SERVICES: Service[] = [
     Icon: Cake,
     description:
       "Automated SMS or email 7 days before each client birthday with a booking offer.",
-    priceFrom: 250,
     image: U("photo-1558636508-e0db3814bd1d"),
+    pricing: { type: "managed", monthly: 29, oneOff: 250 },
   },
   {
     id: "beauty-whatsapp",
@@ -85,10 +90,11 @@ export const SERVICES: Service[] = [
     Icon: MessageCircle,
     description:
       "Smart assistant that handles pricing, availability and booking questions 24/7.",
-    priceFrom: 350,
     image: U("photo-1611746872915-64382b5c76da"),
     badge: "Essential",
+    pricing: { type: "managed", monthly: 59, oneOff: 350 },
   },
+
   // ─── FOOD ─────────────────────────────────────────────────────────────────
   {
     id: "food-website",
@@ -97,8 +103,8 @@ export const SERVICES: Service[] = [
     Icon: UtensilsCrossed,
     description:
       "Cinematic website with menu, hours, gallery, and Google Maps integration.",
-    priceFrom: 790,
     image: U("photo-1517248135467-4c7edcad34c4"),
+    pricing: { type: "build", oneOff: 790, klarna: true },
   },
   {
     id: "food-reservation",
@@ -107,9 +113,9 @@ export const SERVICES: Service[] = [
     Icon: CalendarClock,
     description:
       "Self-service booking with no-show deposit and automated confirmations.",
-    priceFrom: 800,
     image: U("photo-1414235077428-338989a2e8c0"),
     badge: "Essential",
+    pricing: { type: "managed", monthly: 59, oneOff: 500 },
   },
   {
     id: "food-qr-menu",
@@ -118,8 +124,8 @@ export const SERVICES: Service[] = [
     Icon: QrCode,
     description:
       "Scan-to-order menu that syncs with kitchen tickets and upsells automatically.",
-    priceFrom: 650,
     image: U("photo-1606787366850-de6330128bfc"),
+    pricing: { type: "managed", monthly: 19, oneOff: 150 },
   },
   {
     id: "food-loyalty",
@@ -128,8 +134,8 @@ export const SERVICES: Service[] = [
     Icon: Stamp,
     description:
       "Digital loyalty card (10 visits = 1 free) with automated tracking.",
-    priceFrom: 450,
     image: U("photo-1559925393-8be0ec4767c8"),
+    pricing: { type: "managed", monthly: 49, oneOff: 450 },
   },
   {
     id: "food-events",
@@ -138,8 +144,8 @@ export const SERVICES: Service[] = [
     Icon: Users,
     description:
       "Inquiry form for private events with automated follow-up sequence.",
-    priceFrom: 250,
     image: U("photo-1519167758481-83f550bb49b3"),
+    pricing: { type: "oneoff", oneOff: 250 },
   },
   {
     id: "food-reviews",
@@ -148,8 +154,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Trigger Google + TripAdvisor review requests after each booking.",
-    priceFrom: 300,
     image: U("photo-1551434678-e076c223a692"),
+    pricing: { type: "managed", monthly: 29, oneOff: 300 },
   },
 
   // ─── TRADES ───────────────────────────────────────────────────────────────
@@ -160,8 +166,8 @@ export const SERVICES: Service[] = [
     Icon: Monitor,
     description:
       "Trust-first website with accreditations, before/after gallery, and lead capture form.",
-    priceFrom: 790,
     image: U("photo-1504307651254-35680f356dfd"),
+    pricing: { type: "build", oneOff: 790, klarna: true },
   },
   {
     id: "trades-quote-form",
@@ -170,8 +176,8 @@ export const SERVICES: Service[] = [
     Icon: Wrench,
     description:
       "Smart multi-step form that qualifies leads and auto-sends a quote estimate by email.",
-    priceFrom: 450,
     image: U("photo-1581092795360-fd1ca04f0952"),
+    pricing: { type: "oneoff", oneOff: 450 },
   },
   {
     id: "trades-availability",
@@ -180,8 +186,8 @@ export const SERVICES: Service[] = [
     Icon: CalendarCheck,
     description:
       "Live calendar showing open slots — customers book without calling.",
-    priceFrom: 600,
     image: U("photo-1506784365847-bbad939e9335"),
+    pricing: { type: "managed", monthly: 29, oneOff: 600 },
   },
   {
     id: "trades-follow-up",
@@ -190,8 +196,8 @@ export const SERVICES: Service[] = [
     Icon: Mail,
     description:
       "Automated 3-email follow-up after each quote sent — doubles conversion rate.",
-    priceFrom: 300,
     image: U("photo-1563986768494-4dee2763ff3f"),
+    pricing: { type: "managed", monthly: 29, oneOff: 300 },
   },
   {
     id: "trades-reviews",
@@ -200,8 +206,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Auto-request Google reviews 48h after job completion via SMS or email.",
-    priceFrom: 250,
     image: U("photo-1556742111-a301076d9d18"),
+    pricing: { type: "managed", monthly: 29, oneOff: 250 },
   },
   {
     id: "trades-whatsapp",
@@ -210,8 +216,8 @@ export const SERVICES: Service[] = [
     Icon: MessageCircle,
     description:
       "Handles after-hours enquiries, collects job details, and books call-backs automatically.",
-    priceFrom: 350,
     image: U("photo-1611746872915-64382b5c76da"),
+    pricing: { type: "managed", monthly: 59, oneOff: 350 },
   },
 
   // ─── BEVERAGE ─────────────────────────────────────────────────────────────
@@ -222,8 +228,8 @@ export const SERVICES: Service[] = [
     Icon: Wine,
     description:
       "Atmospheric website with seasonal menus, event calendar, and online ordering.",
-    priceFrom: 790,
     image: U("photo-1510812431401-41d2bd2722f3"),
+    pricing: { type: "build", oneOff: 790, klarna: true },
   },
   {
     id: "beverage-ordering",
@@ -232,8 +238,8 @@ export const SERVICES: Service[] = [
     Icon: ShoppingBag,
     description:
       "E-commerce storefront for wine, spirits or craft drinks — with age verification.",
-    priceFrom: 1200,
     image: U("photo-1547595628-c61a29f496f0"),
+    pricing: { type: "build", oneOff: 1200, klarna: true },
   },
   {
     id: "beverage-events",
@@ -242,8 +248,8 @@ export const SERVICES: Service[] = [
     Icon: Ticket,
     description:
       "Sell tickets to tastings, masterclasses and private events with automated comms.",
-    priceFrom: 650,
     image: U("photo-1527529482837-4698179dc6ce"),
+    pricing: { type: "managed", monthly: 49, oneOff: 650 },
   },
   {
     id: "beverage-loyalty",
@@ -252,8 +258,8 @@ export const SERVICES: Service[] = [
     Icon: Crown,
     description:
       "Digital membership with exclusive access, early releases, and member-only pricing.",
-    priceFrom: 800,
     image: U("photo-1543364195-bfe6e4932397"),
+    pricing: { type: "managed", monthly: 49, oneOff: 800 },
   },
   {
     id: "beverage-whatsapp",
@@ -262,8 +268,8 @@ export const SERVICES: Service[] = [
     Icon: MessageCircle,
     description:
       "Handles stock questions, opening hours, and event bookings around the clock.",
-    priceFrom: 350,
     image: U("photo-1611746872915-64382b5c76da"),
+    pricing: { type: "managed", monthly: 59, oneOff: 350 },
   },
   {
     id: "beverage-reviews",
@@ -272,8 +278,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Automated review requests to Google and Vivino after every purchase.",
-    priceFrom: 300,
     image: U("photo-1556742111-a301076d9d18"),
+    pricing: { type: "managed", monthly: 29, oneOff: 300 },
   },
 
   // ─── HOSPITALITY ──────────────────────────────────────────────────────────
@@ -284,8 +290,8 @@ export const SERVICES: Service[] = [
     Icon: BedDouble,
     description:
       "Full property website with room showcase, direct booking, and local attractions guide.",
-    priceFrom: 1490,
     image: U("photo-1566073771259-6a8506099945"),
+    pricing: { type: "build", oneOff: 1490, klarna: true },
   },
   {
     id: "hospitality-booking",
@@ -294,8 +300,8 @@ export const SERVICES: Service[] = [
     Icon: CalendarCheck,
     description:
       "Commission-free booking widget that beats OTA rates and handles payment.",
-    priceFrom: 1200,
     image: U("photo-1520250497591-112f2f40a3f4"),
+    pricing: { type: "managed", monthly: 89, oneOff: 1200 },
   },
   {
     id: "hospitality-upsell",
@@ -304,8 +310,8 @@ export const SERVICES: Service[] = [
     Icon: Bell,
     description:
       "Automated email 3 days before check-in offering upgrades, breakfast, and extras.",
-    priceFrom: 450,
     image: U("photo-1551882547-ff40c63fe5fa"),
+    pricing: { type: "managed", monthly: 29, oneOff: 450 },
   },
   {
     id: "hospitality-reviews",
@@ -314,8 +320,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Post-checkout review requests to Google, Booking.com, and TripAdvisor.",
-    priceFrom: 300,
     image: U("photo-1556742111-a301076d9d18"),
+    pricing: { type: "managed", monthly: 29, oneOff: 300 },
   },
   {
     id: "hospitality-whatsapp",
@@ -324,8 +330,8 @@ export const SERVICES: Service[] = [
     Icon: MessageCircle,
     description:
       "Answers FAQs, shares directions, and handles check-in instructions automatically.",
-    priceFrom: 500,
     image: U("photo-1611746872915-64382b5c76da"),
+    pricing: { type: "managed", monthly: 59, oneOff: 500 },
   },
   {
     id: "hospitality-gift",
@@ -334,8 +340,8 @@ export const SERVICES: Service[] = [
     Icon: Gift,
     description:
       "Sell and redeem digital gift vouchers — auto-fulfilled by email.",
-    priceFrom: 450,
     image: U("photo-1607344645866-009c320b63e0"),
+    pricing: { type: "managed", monthly: 29, oneOff: 450 },
   },
 
   // ─── ECOMMERCE ────────────────────────────────────────────────────────────
@@ -346,8 +352,8 @@ export const SERVICES: Service[] = [
     Icon: ShoppingBag,
     description:
       "Conversion-tuned storefront with brand story, lookbook, and fast checkout.",
-    priceFrom: 1490,
     image: U("photo-1556228578-8c89e6adf883"),
+    pricing: { type: "build", oneOff: 1490, klarna: true },
   },
   {
     id: "ecommerce-abandoned",
@@ -356,8 +362,8 @@ export const SERVICES: Service[] = [
     Icon: ShoppingCart,
     description:
       "Automated 3-step email sequence that recovers 15–25% of lost sales.",
-    priceFrom: 400,
     image: U("photo-1561069934-eee225952461"),
+    pricing: { type: "managed", monthly: 49, oneOff: 400 },
   },
   {
     id: "ecommerce-loyalty",
@@ -366,8 +372,8 @@ export const SERVICES: Service[] = [
     Icon: Gift,
     description:
       "Points-based rewards system that converts one-time buyers into repeat customers.",
-    priceFrom: 700,
     image: U("photo-1607344645866-009c320b63e0"),
+    pricing: { type: "managed", monthly: 49, oneOff: 700 },
   },
   {
     id: "ecommerce-reviews",
@@ -376,8 +382,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Auto-request reviews 14 days post-delivery. Displays UGC on product pages.",
-    priceFrom: 350,
     image: U("photo-1556742111-a301076d9d18"),
+    pricing: { type: "managed", monthly: 29, oneOff: 350 },
   },
   {
     id: "ecommerce-upsell",
@@ -386,8 +392,8 @@ export const SERVICES: Service[] = [
     Icon: TrendingUp,
     description:
       "Personalised product recommendations sent 48h after purchase.",
-    priceFrom: 400,
     image: U("photo-1563013544-824ae1b704d3"),
+    pricing: { type: "managed", monthly: 29, oneOff: 400 },
   },
   {
     id: "ecommerce-seo",
@@ -396,8 +402,8 @@ export const SERVICES: Service[] = [
     Icon: Search,
     description:
       "Full keyword + on-page audit for your product catalogue with an action plan.",
-    priceFrom: 499,
     image: U("photo-1460925895917-afdab827c52f"),
+    pricing: { type: "oneoff", oneOff: 499 },
   },
 
   // ─── CRAFT ────────────────────────────────────────────────────────────────
@@ -408,8 +414,8 @@ export const SERVICES: Service[] = [
     Icon: Palette,
     description:
       "Artisan website with commission flow, process gallery, and waitlist signup.",
-    priceFrom: 790,
     image: U("photo-1487530811015-780c5c89d034"),
+    pricing: { type: "build", oneOff: 790, klarna: true },
   },
   {
     id: "craft-commission",
@@ -418,8 +424,8 @@ export const SERVICES: Service[] = [
     Icon: PenLine,
     description:
       "Multi-step form that qualifies commission requests and auto-sends a pricing guide.",
-    priceFrom: 450,
     image: U("photo-1452860606245-08befc0ff44b"),
+    pricing: { type: "oneoff", oneOff: 450 },
   },
   {
     id: "craft-waitlist",
@@ -428,8 +434,8 @@ export const SERVICES: Service[] = [
     Icon: Mail,
     description:
       "Collect interest before a drop. Auto-email when slots open. Build scarcity.",
-    priceFrom: 350,
     image: U("photo-1516387938699-a927ef949ece"),
+    pricing: { type: "managed", monthly: 19, oneOff: 350 },
   },
   {
     id: "craft-shop",
@@ -438,8 +444,8 @@ export const SERVICES: Service[] = [
     Icon: ShoppingBag,
     description:
       "Lightweight e-commerce for limited editions — with inventory alerts.",
-    priceFrom: 800,
     image: U("photo-1490750967868-88df5691cc89"),
+    pricing: { type: "build", oneOff: 800, klarna: true },
   },
   {
     id: "craft-reviews",
@@ -448,8 +454,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Automated review request after delivery with a photo-sharing prompt.",
-    priceFrom: 250,
     image: U("photo-1556742111-a301076d9d18"),
+    pricing: { type: "managed", monthly: 29, oneOff: 250 },
   },
   {
     id: "craft-whatsapp",
@@ -458,8 +464,8 @@ export const SERVICES: Service[] = [
     Icon: MessageCircle,
     description:
       "Handles commission questions, timelines, and pricing while you're in the workshop.",
-    priceFrom: 350,
     image: U("photo-1611746872915-64382b5c76da"),
+    pricing: { type: "managed", monthly: 59, oneOff: 350 },
   },
 
   // ─── STUDIO ───────────────────────────────────────────────────────────────
@@ -470,8 +476,8 @@ export const SERVICES: Service[] = [
     Icon: Camera,
     description:
       "Full-screen portfolio with contact form, availability calendar, and client area.",
-    priceFrom: 790,
     image: U("photo-1542038784456-1ea8e935640e"),
+    pricing: { type: "build", oneOff: 790, klarna: true },
   },
   {
     id: "studio-booking",
@@ -480,8 +486,8 @@ export const SERVICES: Service[] = [
     Icon: CalendarCheck,
     description:
       "Package-based booking with deposit, brief questionnaire, and automated prep guide.",
-    priceFrom: 700,
     image: U("photo-1611926653458-09294b3142bf"),
+    pricing: { type: "managed", monthly: 59, oneOff: 700 },
   },
   {
     id: "studio-gallery",
@@ -490,8 +496,8 @@ export const SERVICES: Service[] = [
     Icon: ImageIcon,
     description:
       "Password-protected online gallery with download, favourite, and share tools.",
-    priceFrom: 500,
     image: U("photo-1555952517-2e8e729e0b44"),
+    pricing: { type: "managed", monthly: 29, oneOff: 500 },
   },
   {
     id: "studio-crm",
@@ -500,8 +506,8 @@ export const SERVICES: Service[] = [
     Icon: ClipboardList,
     description:
       "Lightweight CRM to track leads, bookings, and follow-ups without a spreadsheet.",
-    priceFrom: 650,
     image: U("photo-1460925895917-afdab827c52f"),
+    pricing: { type: "managed", monthly: 49, oneOff: 650 },
   },
   {
     id: "studio-reviews",
@@ -510,8 +516,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Auto-request Google reviews 7 days after gallery delivery.",
-    priceFrom: 250,
     image: U("photo-1556742111-a301076d9d18"),
+    pricing: { type: "managed", monthly: 29, oneOff: 250 },
   },
   {
     id: "studio-referral",
@@ -520,8 +526,8 @@ export const SERVICES: Service[] = [
     Icon: Gift,
     description:
       "Automated referral system — clients get a discount code to share with friends.",
-    priceFrom: 400,
     image: U("photo-1607344645866-009c320b63e0"),
+    pricing: { type: "managed", monthly: 29, oneOff: 400 },
   },
 
   // ─── RETAIL ───────────────────────────────────────────────────────────────
@@ -532,8 +538,8 @@ export const SERVICES: Service[] = [
     Icon: Tag,
     description:
       "Brand-forward site with lookbook, store locator, and new-arrival email signup.",
-    priceFrom: 1490,
     image: U("photo-1441984904996-e0b6ba687e04"),
+    pricing: { type: "build", oneOff: 1490, klarna: true },
   },
   {
     id: "retail-ecommerce",
@@ -542,8 +548,8 @@ export const SERVICES: Service[] = [
     Icon: ShoppingBag,
     description:
       "Lightweight online shop with in-store pickup — perfect for small-batch retailers.",
-    priceFrom: 900,
     image: U("photo-1472851294608-062f824d29cc"),
+    pricing: { type: "build", oneOff: 900, klarna: true },
   },
   {
     id: "retail-loyalty",
@@ -552,8 +558,8 @@ export const SERVICES: Service[] = [
     Icon: Gift,
     description:
       "Digital punch card that brings customers back — tracked and auto-rewarded.",
-    priceFrom: 450,
     image: U("photo-1607344645866-009c320b63e0"),
+    pricing: { type: "managed", monthly: 49, oneOff: 450 },
   },
   {
     id: "retail-newsletter",
@@ -562,8 +568,8 @@ export const SERVICES: Service[] = [
     Icon: Mail,
     description:
       "Auto-send a curated email to your list each time new stock arrives.",
-    priceFrom: 350,
     image: U("photo-1516387938699-a927ef949ece"),
+    pricing: { type: "managed", monthly: 19, oneOff: 350 },
   },
   {
     id: "retail-whatsapp",
@@ -572,8 +578,8 @@ export const SERVICES: Service[] = [
     Icon: MessageCircle,
     description:
       "Broadcast new arrivals and limited-edition drops to opted-in customers instantly.",
-    priceFrom: 350,
     image: U("photo-1611746872915-64382b5c76da"),
+    pricing: { type: "managed", monthly: 59, oneOff: 350 },
   },
   {
     id: "retail-reviews",
@@ -582,8 +588,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Post-purchase review requests that build your local search presence.",
-    priceFrom: 250,
     image: U("photo-1556742111-a301076d9d18"),
+    pricing: { type: "managed", monthly: 29, oneOff: 250 },
   },
 
   // ─── WELLNESS ─────────────────────────────────────────────────────────────
@@ -594,8 +600,8 @@ export const SERVICES: Service[] = [
     Icon: Heart,
     description:
       "Calm, trust-first website with class schedule, instructor bios, and trial signup.",
-    priceFrom: 790,
     image: U("photo-1545205597-3d9d02c29597"),
+    pricing: { type: "build", oneOff: 790, klarna: true },
   },
   {
     id: "wellness-booking",
@@ -604,8 +610,8 @@ export const SERVICES: Service[] = [
     Icon: CalendarCheck,
     description:
       "Drop-in and membership booking with waitlists, reminders, and cancellation handling.",
-    priceFrom: 800,
     image: U("photo-1611926653458-09294b3142bf"),
+    pricing: { type: "managed", monthly: 89, oneOff: 800 },
   },
   {
     id: "wellness-membership",
@@ -614,8 +620,8 @@ export const SERVICES: Service[] = [
     Icon: Ticket,
     description:
       "Recurring membership with class credits, exclusive content, and auto-renewal.",
-    priceFrom: 900,
     image: U("photo-1518611012118-696072aa579a"),
+    pricing: { type: "managed", monthly: 49, oneOff: 900 },
   },
   {
     id: "wellness-nurture",
@@ -624,8 +630,8 @@ export const SERVICES: Service[] = [
     Icon: Mail,
     description:
       "Automated 5-email welcome sequence that converts trial visitors into regulars.",
-    priceFrom: 400,
     image: U("photo-1516387938699-a927ef949ece"),
+    pricing: { type: "managed", monthly: 29, oneOff: 400 },
   },
   {
     id: "wellness-reviews",
@@ -634,8 +640,8 @@ export const SERVICES: Service[] = [
     Icon: Star,
     description:
       "Auto-request Google reviews from clients after their 3rd session.",
-    priceFrom: 250,
     image: U("photo-1556742111-a301076d9d18"),
+    pricing: { type: "managed", monthly: 29, oneOff: 250 },
   },
   {
     id: "wellness-whatsapp",
@@ -644,8 +650,8 @@ export const SERVICES: Service[] = [
     Icon: MessageCircle,
     description:
       "Automated 24h class reminders via WhatsApp — reduce no-shows by up to 40%.",
-    priceFrom: 350,
     image: U("photo-1611746872915-64382b5c76da"),
+    pricing: { type: "managed", monthly: 59, oneOff: 350 },
   },
 
   // ─── CROSS-NICHE ──────────────────────────────────────────────────────────
@@ -656,9 +662,9 @@ export const SERVICES: Service[] = [
     Icon: TrendingUp,
     description:
       "Automated review requests sent via SMS, WhatsApp & email after each visit. Custom QR code for in-store signage. Auto follow-up at day 3. More reviews = higher Google ranking = more customers.",
-    priceFrom: 390,
     image: U("photo-1556742111-a301076d9d18"),
     badge: "Best for SEO",
+    pricing: { type: "managed", monthly: 49, oneOff: 390 },
   },
 ];
 

@@ -4,19 +4,61 @@ import Image from "next/image";
 import { X } from "lucide-react";
 import { type Service } from "@/data/services";
 import { useCart } from "@/stores/cartStore";
+import { useSearchStore } from "@/lib/searchStore";
+import KlarnaLabel from "./KlarnaLabel";
 
 type Props = { service: Service };
 
+const badgeStyles: Record<NonNullable<Service["badge"]>, string> = {
+  Essential:      "bg-[#C9A875] text-[#1F1A16]",
+  "Best for SEO": "bg-[#1F1A16] text-[#C9A875]",
+  "Most chosen":  "bg-[#1F1A16] text-[#F5F0E8]",
+};
+
 export default function ServiceCard({ service }: Props) {
   const { items, add, remove } = useCart();
+  const { billingMode } = useSearchStore();
   const inCart = items.some((i) => i.id === service.id);
-  const { Icon } = service;
+  const { Icon, pricing } = service;
 
-  const badgeStyles: Record<NonNullable<Service["badge"]>, string> = {
-    Essential:      "bg-[#C9A875] text-[#1F1A16]",
-    "Best for SEO": "bg-[#1F1A16] text-[#C9A875]",
-    "Most popular": "bg-[#1F1A16] text-[#F5F0E8]",
-  };
+  function handleAdd() {
+    const isManaged = pricing.type === "managed";
+    add({
+      id: service.id,
+      title: service.title,
+      billingMode: isManaged ? billingMode : "oneoff",
+      oneOffAmount: pricing.oneOff,
+      monthlyAmount: isManaged ? pricing.monthly : undefined,
+    });
+  }
+
+  // ─── Price block ──────────────────────────────────────────────────────────
+  let primaryPrice: string;
+  let subLine: React.ReactNode = null;
+
+  if (pricing.type === "managed") {
+    if (billingMode === "monthly") {
+      primaryPrice = `From £${pricing.monthly}/mo`;
+      subLine = (
+        <p className="text-xs text-[#8A7B6C] italic mt-0.5">
+          or £{pricing.oneOff.toLocaleString("en-GB")} one-off setup
+        </p>
+      );
+    } else {
+      primaryPrice = `From £${pricing.oneOff.toLocaleString("en-GB")}`;
+      subLine = (
+        <p className="text-xs text-[#8A7B6C] mt-0.5">
+          or £{pricing.monthly}/month (managed)
+        </p>
+      );
+    }
+  } else {
+    // build or oneoff
+    primaryPrice = `From £${pricing.oneOff.toLocaleString("en-GB")}`;
+    if (pricing.type === "build") {
+      subLine = <KlarnaLabel />;
+    }
+  }
 
   return (
     <article className="group flex flex-col">
@@ -60,9 +102,12 @@ export default function ServiceCard({ service }: Props) {
             />
             <span>{service.title}</span>
           </h3>
-          <span className="font-display font-light text-base text-[#1F1A16] whitespace-nowrap shrink-0">
-            From £{service.priceFrom.toLocaleString("en-GB")}
-          </span>
+          <div className="text-right shrink-0">
+            <span className="font-display font-light text-base text-[#1F1A16] whitespace-nowrap">
+              {primaryPrice}
+            </span>
+            {subLine}
+          </div>
         </div>
 
         <p className="text-sm text-[#8A7B6C] leading-relaxed line-clamp-2">
@@ -70,9 +115,7 @@ export default function ServiceCard({ service }: Props) {
         </p>
 
         <button
-          onClick={() =>
-            add({ id: service.id, title: service.title, priceFrom: service.priceFrom })
-          }
+          onClick={handleAdd}
           disabled={inCart}
           className={`mt-3 w-full rounded-full px-4 py-2.5 text-sm font-medium transition-all ${
             inCart

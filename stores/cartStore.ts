@@ -3,7 +3,9 @@ import { create } from "zustand";
 export type CartItem = {
   id: string;
   title: string;
-  priceFrom: number;
+  billingMode: "monthly" | "oneoff";
+  oneOffAmount: number;
+  monthlyAmount?: number; // only for managed services
 };
 
 type CartStore = {
@@ -11,7 +13,7 @@ type CartStore = {
   add: (item: CartItem) => void;
   remove: (id: string) => void;
   clear: () => void;
-  total: () => number;
+  totals: () => { oneOff: number; monthly: number };
 };
 
 export const useCart = create<CartStore>((set, get) => ({
@@ -25,5 +27,14 @@ export const useCart = create<CartStore>((set, get) => ({
   remove: (id) =>
     set((state) => ({ items: state.items.filter((i) => i.id !== id) })),
   clear: () => set({ items: [] }),
-  total: () => get().items.reduce((sum, i) => sum + i.priceFrom, 0),
+  totals: () => {
+    const items = get().items;
+    const oneOff = items
+      .filter((i) => i.billingMode === "oneoff")
+      .reduce((sum, i) => sum + i.oneOffAmount, 0);
+    const monthly = items
+      .filter((i) => i.billingMode === "monthly")
+      .reduce((sum, i) => sum + (i.monthlyAmount ?? 0), 0);
+    return { oneOff, monthly };
+  },
 }));
