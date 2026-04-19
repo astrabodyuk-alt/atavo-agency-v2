@@ -11,25 +11,33 @@ export default function AuditForm() {
   const [message, setMessage] = useState("");
 
   const businessRef = useRef<HTMLInputElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
 
-  // When the header's Submit button fires, pre-fill fields from store values
   useEffect(() => {
     if (submitTrigger === 0) return;
 
     if (businessType) setBusiness(businessType);
 
-    const parts = [
+    const lines = [
       businessType && `Business type: ${businessType}`,
       timeline && `Timeline: ${timeline}`,
       budget && `Budget: ${budget}`,
     ]
       .filter(Boolean)
-      .join(" · ");
+      .join("\n");
 
-    if (parts) setMessage(parts + "\n\n");
+    const prefilled = lines ? lines + "\n\nWhat I'd love to fix or build: " : "";
+    if (prefilled) setMessage(prefilled);
 
-    // Focus after scroll animation completes
-    setTimeout(() => businessRef.current?.focus(), 800);
+    // After scroll completes: focus textarea, cursor at end
+    setTimeout(() => {
+      const ta = messageRef.current;
+      if (!ta) return;
+      ta.focus();
+      const len = ta.value.length;
+      ta.setSelectionRange(len, len);
+      ta.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 800);
   }, [submitTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,7 +47,6 @@ export default function AuditForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ business, website, message, timeline, budget }),
     });
-    // Reset
     setBusiness("");
     setWebsite("");
     setMessage("");
@@ -78,18 +85,19 @@ export default function AuditForm() {
 
       <div>
         <label className="block text-sm font-medium text-[#1F1A16] mb-2">
-          What&apos;s the one thing you&apos;d fix if you could?
+          Tell us about your project
         </label>
         <textarea
+          ref={messageRef}
           name="message"
-          rows={4}
+          rows={5}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          placeholder="Tell us what you want to improve, build or fix. The more specific the better."
           className="w-full border border-[#E4DACC] rounded-sm px-4 py-3 text-sm text-[#1F1A16] bg-[#F5F0E8] placeholder:text-[#8A7B6C]/50 focus:outline-none focus:border-[#C9A875] transition-colors resize-none"
         />
       </div>
 
-      {/* Hidden fields so timeline + budget reach the backend */}
       <input type="hidden" name="timeline" value={timeline ?? ""} />
       <input type="hidden" name="budget" value={budget ?? ""} />
 
