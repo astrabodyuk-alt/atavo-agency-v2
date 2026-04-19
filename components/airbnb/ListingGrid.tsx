@@ -1,7 +1,13 @@
 "use client";
 
 import { X } from "lucide-react";
-import { SERVICES, NICHE_LABELS, type Niche } from "@/data/services";
+import { SERVICES, NICHE_LABELS, type Niche, type Service } from "@/data/services";
+
+function matchesNiche(service: Service, niche: Niche): boolean {
+  return Array.isArray(service.niche)
+    ? service.niche.includes(niche)
+    : service.niche === niche;
+}
 import ServiceCard from "./ServiceCard";
 import { useSearchStore } from "@/lib/searchStore";
 
@@ -9,7 +15,7 @@ export default function ListingGrid() {
   const { selectedNiche, setSelectedNiche } = useSearchStore();
 
   const filtered = selectedNiche
-    ? SERVICES.filter((s) => s.niche === selectedNiche)
+    ? SERVICES.filter((s) => matchesNiche(s, selectedNiche as Niche))
     : SERVICES;
 
   return (

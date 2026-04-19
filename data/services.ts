@@ -1,24 +1,9 @@
 import {
-  Monitor,
-  Calendar,
-  Gift,
-  Cake,
-  MessageCircle,
-  Star,
-  UtensilsCrossed,
-  QrCode,
-  Ticket,
-  Mail,
-  Wrench,
-  Wine,
-  Crown,
-  Bell,
-  ShoppingCart,
-  Search,
-  PenLine,
-  ShoppingBag,
-  Image as ImageIcon,
-  ClipboardList,
+  Sparkles, CalendarCheck, Gift, Cake, MessageCircle, Star,
+  UtensilsCrossed, CalendarClock, QrCode, Stamp, Users, TrendingUp,
+  Wrench, Wine, Ticket, Crown, Bell, ShoppingCart, ShoppingBag,
+  Search, PenLine, Image as ImageIcon, ClipboardList,
+  BedDouble, Camera, Tag, Heart, Palette, Monitor, Mail,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -38,12 +23,13 @@ export type Niche =
 
 export type Service = {
   id: string;
-  niche: Niche;
+  niche: Niche | Niche[];
   title: string;
-  icon: LucideIcon;
+  Icon: LucideIcon;
   description: string;
   priceFrom: number;
   image: string;
+  badge?: "Most popular" | "Best for SEO" | "Cross-niche";
 };
 
 const Q = "?w=800&q=80&auto=format&fit=crop";
@@ -55,27 +41,29 @@ export const SERVICES: Service[] = [
     id: "beauty-website",
     niche: "beauty",
     title: "Bespoke salon website",
-    icon: Monitor,
+    Icon: Sparkles,
     description:
       "Brand-led website with booking CTA, photo gallery, team bios and local SEO.",
     priceFrom: 790,
     image: U("photo-1560066984-138dadb4c035"),
+    badge: "Best for SEO",
   },
   {
     id: "beauty-booking",
     niche: "beauty",
     title: "Online booking system",
-    icon: Calendar,
+    Icon: CalendarCheck,
     description:
       "Custom booking with automated reminders, deposit capture, and calendar sync.",
     priceFrom: 800,
     image: U("photo-1611926653458-09294b3142bf"),
+    badge: "Most popular",
   },
   {
     id: "beauty-loyalty",
     niche: "beauty",
     title: "Loyalty & gift cards",
-    icon: Gift,
+    Icon: Gift,
     description:
       "Digital loyalty punch card and gift voucher system that drives repeat visits.",
     priceFrom: 450,
@@ -85,7 +73,7 @@ export const SERVICES: Service[] = [
     id: "beauty-birthday",
     niche: "beauty",
     title: "Birthday automation",
-    icon: Cake,
+    Icon: Cake,
     description:
       "Automated SMS or email 7 days before each client birthday with a booking offer.",
     priceFrom: 250,
@@ -95,7 +83,7 @@ export const SERVICES: Service[] = [
     id: "beauty-whatsapp",
     niche: "beauty",
     title: "WhatsApp auto-reply",
-    icon: MessageCircle,
+    Icon: MessageCircle,
     description:
       "Smart assistant that handles pricing, availability and booking questions 24/7.",
     priceFrom: 350,
@@ -105,7 +93,7 @@ export const SERVICES: Service[] = [
     id: "beauty-reviews",
     niche: "beauty",
     title: "Review collection",
-    icon: Star,
+    Icon: Star,
     description:
       "Automated Google review requests sent 48h after each visit.",
     priceFrom: 300,
@@ -117,27 +105,29 @@ export const SERVICES: Service[] = [
     id: "food-website",
     niche: "food",
     title: "Animated restaurant site",
-    icon: Monitor,
+    Icon: UtensilsCrossed,
     description:
       "Cinematic website with menu, hours, gallery, and Google Maps integration.",
     priceFrom: 790,
     image: U("photo-1517248135467-4c7edcad34c4"),
+    badge: "Best for SEO",
   },
   {
     id: "food-reservation",
     niche: "food",
     title: "Table reservation system",
-    icon: UtensilsCrossed,
+    Icon: CalendarClock,
     description:
       "Self-service booking with no-show deposit and automated confirmations.",
     priceFrom: 800,
     image: U("photo-1414235077428-338989a2e8c0"),
+    badge: "Most popular",
   },
   {
     id: "food-qr-menu",
     niche: "food",
     title: "QR menu + ordering",
-    icon: QrCode,
+    Icon: QrCode,
     description:
       "Scan-to-order menu that syncs with kitchen tickets and upsells automatically.",
     priceFrom: 650,
@@ -147,7 +137,7 @@ export const SERVICES: Service[] = [
     id: "food-loyalty",
     niche: "food",
     title: "Loyalty stamps",
-    icon: Ticket,
+    Icon: Stamp,
     description:
       "Digital loyalty card (10 visits = 1 free) with automated tracking.",
     priceFrom: 450,
@@ -157,7 +147,7 @@ export const SERVICES: Service[] = [
     id: "food-events",
     niche: "food",
     title: "Private hire form",
-    icon: Mail,
+    Icon: Users,
     description:
       "Inquiry form for private events with automated follow-up sequence.",
     priceFrom: 250,
@@ -167,7 +157,7 @@ export const SERVICES: Service[] = [
     id: "food-reviews",
     niche: "food",
     title: "Review automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Trigger Google + TripAdvisor review requests after each booking.",
     priceFrom: 300,
@@ -179,27 +169,29 @@ export const SERVICES: Service[] = [
     id: "trades-website",
     niche: "trades",
     title: "Tradesmen website",
-    icon: Monitor,
+    Icon: Monitor,
     description:
       "Trust-first website with accreditations, before/after gallery, and lead capture form.",
     priceFrom: 790,
     image: U("photo-1504307651254-35680f356dfd"),
+    badge: "Best for SEO",
   },
   {
     id: "trades-quote-form",
     niche: "trades",
     title: "Instant quote form",
-    icon: Wrench,
+    Icon: Wrench,
     description:
       "Smart multi-step form that qualifies leads and auto-sends a quote estimate by email.",
     priceFrom: 450,
     image: U("photo-1581092795360-fd1ca04f0952"),
+    badge: "Most popular",
   },
   {
     id: "trades-availability",
     niche: "trades",
     title: "Availability calendar",
-    icon: Calendar,
+    Icon: CalendarCheck,
     description:
       "Live calendar showing open slots — customers book without calling.",
     priceFrom: 600,
@@ -209,7 +201,7 @@ export const SERVICES: Service[] = [
     id: "trades-follow-up",
     niche: "trades",
     title: "Follow-up sequence",
-    icon: Mail,
+    Icon: Mail,
     description:
       "Automated 3-email follow-up after each quote sent — doubles conversion rate.",
     priceFrom: 300,
@@ -219,7 +211,7 @@ export const SERVICES: Service[] = [
     id: "trades-reviews",
     niche: "trades",
     title: "Review automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Auto-request Google reviews 48h after job completion via SMS or email.",
     priceFrom: 250,
@@ -229,7 +221,7 @@ export const SERVICES: Service[] = [
     id: "trades-whatsapp",
     niche: "trades",
     title: "WhatsApp enquiry bot",
-    icon: MessageCircle,
+    Icon: MessageCircle,
     description:
       "Handles after-hours enquiries, collects job details, and books call-backs automatically.",
     priceFrom: 350,
@@ -241,17 +233,18 @@ export const SERVICES: Service[] = [
     id: "beverage-website",
     niche: "beverage",
     title: "Cellar & bar website",
-    icon: Monitor,
+    Icon: Wine,
     description:
       "Atmospheric website with seasonal menus, event calendar, and online ordering.",
     priceFrom: 790,
     image: U("photo-1510812431401-41d2bd2722f3"),
+    badge: "Best for SEO",
   },
   {
     id: "beverage-ordering",
     niche: "beverage",
     title: "Online bottle shop",
-    icon: Wine,
+    Icon: ShoppingBag,
     description:
       "E-commerce storefront for wine, spirits or craft drinks — with age verification.",
     priceFrom: 1200,
@@ -261,7 +254,7 @@ export const SERVICES: Service[] = [
     id: "beverage-events",
     niche: "beverage",
     title: "Event ticketing",
-    icon: Ticket,
+    Icon: Ticket,
     description:
       "Sell tickets to tastings, masterclasses and private events with automated comms.",
     priceFrom: 650,
@@ -271,17 +264,18 @@ export const SERVICES: Service[] = [
     id: "beverage-loyalty",
     niche: "beverage",
     title: "Member club system",
-    icon: Crown,
+    Icon: Crown,
     description:
       "Digital membership with exclusive access, early releases, and member-only pricing.",
     priceFrom: 800,
     image: U("photo-1543364195-bfe6e4932397"),
+    badge: "Most popular",
   },
   {
     id: "beverage-whatsapp",
     niche: "beverage",
     title: "WhatsApp auto-reply",
-    icon: MessageCircle,
+    Icon: MessageCircle,
     description:
       "Handles stock questions, opening hours, and event bookings around the clock.",
     priceFrom: 350,
@@ -291,7 +285,7 @@ export const SERVICES: Service[] = [
     id: "beverage-reviews",
     niche: "beverage",
     title: "Review automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Automated review requests to Google and Vivino after every purchase.",
     priceFrom: 300,
@@ -303,27 +297,29 @@ export const SERVICES: Service[] = [
     id: "hospitality-website",
     niche: "hospitality",
     title: "Hotel & B&B website",
-    icon: Monitor,
+    Icon: BedDouble,
     description:
       "Full property website with room showcase, direct booking, and local attractions guide.",
     priceFrom: 1490,
     image: U("photo-1566073771259-6a8506099945"),
+    badge: "Best for SEO",
   },
   {
     id: "hospitality-booking",
     niche: "hospitality",
     title: "Direct booking engine",
-    icon: Calendar,
+    Icon: CalendarCheck,
     description:
       "Commission-free booking widget that beats OTA rates and handles payment.",
     priceFrom: 1200,
     image: U("photo-1520250497591-112f2f40a3f4"),
+    badge: "Most popular",
   },
   {
     id: "hospitality-upsell",
     niche: "hospitality",
     title: "Pre-arrival upsell",
-    icon: Bell,
+    Icon: Bell,
     description:
       "Automated email 3 days before check-in offering upgrades, breakfast, and extras.",
     priceFrom: 450,
@@ -333,7 +329,7 @@ export const SERVICES: Service[] = [
     id: "hospitality-reviews",
     niche: "hospitality",
     title: "Review automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Post-checkout review requests to Google, Booking.com, and TripAdvisor.",
     priceFrom: 300,
@@ -343,7 +339,7 @@ export const SERVICES: Service[] = [
     id: "hospitality-whatsapp",
     niche: "hospitality",
     title: "Guest WhatsApp concierge",
-    icon: MessageCircle,
+    Icon: MessageCircle,
     description:
       "Answers FAQs, shares directions, and handles check-in instructions automatically.",
     priceFrom: 500,
@@ -353,7 +349,7 @@ export const SERVICES: Service[] = [
     id: "hospitality-gift",
     niche: "hospitality",
     title: "Gift voucher system",
-    icon: Gift,
+    Icon: Gift,
     description:
       "Sell and redeem digital gift vouchers — auto-fulfilled by email.",
     priceFrom: 450,
@@ -365,27 +361,29 @@ export const SERVICES: Service[] = [
     id: "ecommerce-website",
     niche: "ecommerce",
     title: "Bespoke shop website",
-    icon: Monitor,
+    Icon: ShoppingBag,
     description:
       "Conversion-tuned storefront with brand story, lookbook, and fast checkout.",
     priceFrom: 1490,
     image: U("photo-1556228578-8c89e6adf883"),
+    badge: "Best for SEO",
   },
   {
     id: "ecommerce-abandoned",
     niche: "ecommerce",
     title: "Abandoned cart recovery",
-    icon: ShoppingCart,
+    Icon: ShoppingCart,
     description:
       "Automated 3-step email sequence that recovers 15–25% of lost sales.",
     priceFrom: 400,
     image: U("photo-1561069934-eee225952461"),
+    badge: "Most popular",
   },
   {
     id: "ecommerce-loyalty",
     niche: "ecommerce",
     title: "Loyalty programme",
-    icon: Gift,
+    Icon: Gift,
     description:
       "Points-based rewards system that converts one-time buyers into repeat customers.",
     priceFrom: 700,
@@ -395,7 +393,7 @@ export const SERVICES: Service[] = [
     id: "ecommerce-reviews",
     niche: "ecommerce",
     title: "Product review automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Auto-request reviews 14 days post-delivery. Displays UGC on product pages.",
     priceFrom: 350,
@@ -405,7 +403,7 @@ export const SERVICES: Service[] = [
     id: "ecommerce-upsell",
     niche: "ecommerce",
     title: "Post-purchase upsell",
-    icon: Mail,
+    Icon: TrendingUp,
     description:
       "Personalised product recommendations sent 48h after purchase.",
     priceFrom: 400,
@@ -415,7 +413,7 @@ export const SERVICES: Service[] = [
     id: "ecommerce-seo",
     niche: "ecommerce",
     title: "Product SEO audit",
-    icon: Search,
+    Icon: Search,
     description:
       "Full keyword + on-page audit for your product catalogue with an action plan.",
     priceFrom: 499,
@@ -427,27 +425,29 @@ export const SERVICES: Service[] = [
     id: "craft-website",
     niche: "craft",
     title: "Maker portfolio website",
-    icon: Monitor,
+    Icon: Palette,
     description:
       "Artisan website with commission flow, process gallery, and waitlist signup.",
     priceFrom: 790,
     image: U("photo-1487530811015-780c5c89d034"),
+    badge: "Best for SEO",
   },
   {
     id: "craft-commission",
     niche: "craft",
     title: "Commission enquiry flow",
-    icon: PenLine,
+    Icon: PenLine,
     description:
       "Multi-step form that qualifies commission requests and auto-sends a pricing guide.",
     priceFrom: 450,
     image: U("photo-1452860606245-08befc0ff44b"),
+    badge: "Most popular",
   },
   {
     id: "craft-waitlist",
     niche: "craft",
     title: "Waitlist & launch system",
-    icon: Mail,
+    Icon: Mail,
     description:
       "Collect interest before a drop. Auto-email when slots open. Build scarcity.",
     priceFrom: 350,
@@ -457,7 +457,7 @@ export const SERVICES: Service[] = [
     id: "craft-shop",
     niche: "craft",
     title: "Small-batch online shop",
-    icon: ShoppingBag,
+    Icon: ShoppingBag,
     description:
       "Lightweight e-commerce for limited editions — with inventory alerts.",
     priceFrom: 800,
@@ -467,7 +467,7 @@ export const SERVICES: Service[] = [
     id: "craft-reviews",
     niche: "craft",
     title: "Testimonial automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Automated review request after delivery with a photo-sharing prompt.",
     priceFrom: 250,
@@ -477,7 +477,7 @@ export const SERVICES: Service[] = [
     id: "craft-whatsapp",
     niche: "craft",
     title: "WhatsApp enquiry bot",
-    icon: MessageCircle,
+    Icon: MessageCircle,
     description:
       "Handles commission questions, timelines, and pricing while you're in the workshop.",
     priceFrom: 350,
@@ -489,27 +489,29 @@ export const SERVICES: Service[] = [
     id: "studio-website",
     niche: "studio",
     title: "Studio portfolio site",
-    icon: Monitor,
+    Icon: Camera,
     description:
       "Full-screen portfolio with contact form, availability calendar, and client area.",
     priceFrom: 790,
     image: U("photo-1542038784456-1ea8e935640e"),
+    badge: "Best for SEO",
   },
   {
     id: "studio-booking",
     niche: "studio",
     title: "Session booking system",
-    icon: Calendar,
+    Icon: CalendarCheck,
     description:
       "Package-based booking with deposit, brief questionnaire, and automated prep guide.",
     priceFrom: 700,
     image: U("photo-1611926653458-09294b3142bf"),
+    badge: "Most popular",
   },
   {
     id: "studio-gallery",
     niche: "studio",
     title: "Client gallery delivery",
-    icon: ImageIcon,
+    Icon: ImageIcon,
     description:
       "Password-protected online gallery with download, favourite, and share tools.",
     priceFrom: 500,
@@ -519,7 +521,7 @@ export const SERVICES: Service[] = [
     id: "studio-crm",
     niche: "studio",
     title: "Client CRM & pipeline",
-    icon: ClipboardList,
+    Icon: ClipboardList,
     description:
       "Lightweight CRM to track leads, bookings, and follow-ups without a spreadsheet.",
     priceFrom: 650,
@@ -529,7 +531,7 @@ export const SERVICES: Service[] = [
     id: "studio-reviews",
     niche: "studio",
     title: "Review automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Auto-request Google reviews 7 days after gallery delivery.",
     priceFrom: 250,
@@ -539,7 +541,7 @@ export const SERVICES: Service[] = [
     id: "studio-referral",
     niche: "studio",
     title: "Referral programme",
-    icon: Gift,
+    Icon: Gift,
     description:
       "Automated referral system — clients get a discount code to share with friends.",
     priceFrom: 400,
@@ -551,27 +553,29 @@ export const SERVICES: Service[] = [
     id: "retail-website",
     niche: "retail",
     title: "Boutique website",
-    icon: Monitor,
+    Icon: Tag,
     description:
       "Brand-forward site with lookbook, store locator, and new-arrival email signup.",
     priceFrom: 1490,
     image: U("photo-1441984904996-e0b6ba687e04"),
+    badge: "Best for SEO",
   },
   {
     id: "retail-ecommerce",
     niche: "retail",
     title: "Click & collect store",
-    icon: ShoppingBag,
+    Icon: ShoppingBag,
     description:
       "Lightweight online shop with in-store pickup — perfect for small-batch retailers.",
     priceFrom: 900,
     image: U("photo-1472851294608-062f824d29cc"),
+    badge: "Most popular",
   },
   {
     id: "retail-loyalty",
     niche: "retail",
     title: "Loyalty card system",
-    icon: Gift,
+    Icon: Gift,
     description:
       "Digital punch card that brings customers back — tracked and auto-rewarded.",
     priceFrom: 450,
@@ -581,7 +585,7 @@ export const SERVICES: Service[] = [
     id: "retail-newsletter",
     niche: "retail",
     title: "New arrivals newsletter",
-    icon: Mail,
+    Icon: Mail,
     description:
       "Auto-send a curated email to your list each time new stock arrives.",
     priceFrom: 350,
@@ -591,7 +595,7 @@ export const SERVICES: Service[] = [
     id: "retail-whatsapp",
     niche: "retail",
     title: "WhatsApp stock alerts",
-    icon: MessageCircle,
+    Icon: MessageCircle,
     description:
       "Broadcast new arrivals and limited-edition drops to opted-in customers instantly.",
     priceFrom: 350,
@@ -601,7 +605,7 @@ export const SERVICES: Service[] = [
     id: "retail-reviews",
     niche: "retail",
     title: "Google review automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Post-purchase review requests that build your local search presence.",
     priceFrom: 250,
@@ -613,27 +617,29 @@ export const SERVICES: Service[] = [
     id: "wellness-website",
     niche: "wellness",
     title: "Wellness studio website",
-    icon: Monitor,
+    Icon: Heart,
     description:
       "Calm, trust-first website with class schedule, instructor bios, and trial signup.",
     priceFrom: 790,
     image: U("photo-1545205597-3d9d02c29597"),
+    badge: "Best for SEO",
   },
   {
     id: "wellness-booking",
     niche: "wellness",
     title: "Class booking system",
-    icon: Calendar,
+    Icon: CalendarCheck,
     description:
       "Drop-in and membership booking with waitlists, reminders, and cancellation handling.",
     priceFrom: 800,
     image: U("photo-1611926653458-09294b3142bf"),
+    badge: "Most popular",
   },
   {
     id: "wellness-membership",
     niche: "wellness",
     title: "Membership portal",
-    icon: Ticket,
+    Icon: Ticket,
     description:
       "Recurring membership with class credits, exclusive content, and auto-renewal.",
     priceFrom: 900,
@@ -643,7 +649,7 @@ export const SERVICES: Service[] = [
     id: "wellness-nurture",
     niche: "wellness",
     title: "New client nurture flow",
-    icon: Mail,
+    Icon: Mail,
     description:
       "Automated 5-email welcome sequence that converts trial visitors into regulars.",
     priceFrom: 400,
@@ -653,7 +659,7 @@ export const SERVICES: Service[] = [
     id: "wellness-reviews",
     niche: "wellness",
     title: "Review automation",
-    icon: Star,
+    Icon: Star,
     description:
       "Auto-request Google reviews from clients after their 3rd session.",
     priceFrom: 250,
@@ -663,11 +669,24 @@ export const SERVICES: Service[] = [
     id: "wellness-whatsapp",
     niche: "wellness",
     title: "WhatsApp class reminders",
-    icon: MessageCircle,
+    Icon: MessageCircle,
     description:
       "Automated 24h class reminders via WhatsApp — reduce no-shows by up to 40%.",
     priceFrom: 350,
     image: U("photo-1611746872915-64382b5c76da"),
+  },
+
+  // ─── CROSS-NICHE ──────────────────────────────────────────────────────────
+  {
+    id: "cross-reviews-automation",
+    niche: ["beauty", "food", "trades", "beverage", "hospitality", "ecommerce", "craft", "studio", "retail", "wellness"],
+    title: "Google Reviews Automation",
+    Icon: TrendingUp,
+    description:
+      "Universal review engine — auto-requests Google reviews at the right moment for any business type.",
+    priceFrom: 299,
+    image: U("photo-1556742111-a301076d9d18"),
+    badge: "Cross-niche",
   },
 ];
 

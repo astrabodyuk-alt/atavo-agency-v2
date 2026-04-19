@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import {
   Sparkles, UtensilsCrossed, Hammer, Wine, BedDouble,
-  ShoppingBag, Wrench, Camera, Tag, Heart,
+  ShoppingBag, Palette, Camera, Tag, Heart,
   ChevronLeft, ChevronRight,
 } from "lucide-react";
 import { useSearchStore } from "@/lib/searchStore";
@@ -15,7 +15,7 @@ const niches = [
   { key: "beverage",    label: "Beverage",     icon: Wine },
   { key: "hospitality", label: "Hospitality",  icon: BedDouble },
   { key: "ecommerce",   label: "E-commerce",   icon: ShoppingBag },
-  { key: "craft",       label: "Craft",        icon: Wrench },
+  { key: "craft",       label: "Craft",        icon: Palette },
   { key: "studio",      label: "Studio",       icon: Camera },
   { key: "retail",      label: "Retail",       icon: Tag },
   { key: "wellness",    label: "Wellness",     icon: Heart },
@@ -65,7 +65,7 @@ export default function CategoryBar() {
                     : "text-[#8A7B6C] hover:text-[#1F1A16] border-b-2 border-transparent"
                 }`}
               >
-                <Icon size={24} />
+                <Icon size={22} strokeWidth={1.5} />
                 <span className="text-xs font-medium whitespace-nowrap">{label}</span>
               </button>
             );
