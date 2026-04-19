@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import { X } from "lucide-react";
 import { type Service } from "@/data/services";
 import { useCart } from "@/stores/cartStore";
 
 type Props = { service: Service };
 
 export default function ServiceCard({ service }: Props) {
-  const { items, add } = useCart();
+  const { items, add, remove } = useCart();
   const inCart = items.some((i) => i.id === service.id);
   const { Icon } = service;
 
@@ -36,11 +37,15 @@ export default function ServiceCard({ service }: Props) {
             {service.badge}
           </span>
         )}
-        {/* In-cart confirmation — top right */}
+        {/* In-cart — tap to remove */}
         {inCart && (
-          <div className="absolute top-3 right-3 bg-[#C9A875] text-[#1F1A16] text-xs font-semibold px-2.5 py-1 rounded-full shadow-md">
-            Added ✓
-          </div>
+          <button
+            onClick={(e) => { e.stopPropagation(); remove(service.id); }}
+            className="absolute top-3 right-3 flex items-center gap-1 bg-[#C9A875] text-[#1F1A16] text-xs font-semibold px-2.5 py-1 rounded-full shadow-md cursor-pointer transition-transform hover:scale-105 active:scale-95"
+            aria-label="Remove from build"
+          >
+            Added <X size={11} strokeWidth={2.5} />
+          </button>
         )}
       </div>
 
