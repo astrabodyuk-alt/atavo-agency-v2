@@ -12,3 +12,16 @@ body {
   font-family: var(--font-display);
   font-feature-settings: 'ss01', 'ss02';
 }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.listing-image:hover img {
+  transform: scale(1.02);
+}
+
