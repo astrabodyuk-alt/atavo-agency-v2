@@ -1,56 +1,64 @@
 "use client";
 
+import Image from "next/image";
 import { type Service } from "@/data/services";
 import { useCart } from "@/stores/cartStore";
 
 type Props = { service: Service };
 
 export default function ServiceCard({ service }: Props) {
-  const { items, add, remove } = useCart();
+  const { items, add } = useCart();
   const inCart = items.some((i) => i.id === service.id);
 
-  const toggle = () => {
-    if (inCart) {
-      remove(service.id);
-    } else {
-      add({ id: service.id, title: service.title, priceFrom: service.priceFrom });
-    }
-  };
-
   return (
-    <div
-      className={`rounded-xl border p-6 flex flex-col gap-4 transition-all ${
-        inCart
-          ? "border-[#C9A875] bg-[#C9A875]/8"
-          : "border-[#E4DACC] bg-[#F5F0E8] hover:shadow-md"
-      }`}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <span className="text-2xl leading-none">{service.icon}</span>
-        <span className="text-xs font-medium text-[#8A7B6C] bg-[#E8DFD2] rounded-full px-2.5 py-1 shrink-0">
-          From £{service.priceFrom.toLocaleString()}
-        </span>
+    <article className="group flex flex-col">
+      {/* Image — 4:3, rounded, hover zoom */}
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl bg-[#E8DFD2]">
+        <Image
+          src={service.image}
+          alt={service.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+        {/* In-cart badge */}
+        {inCart && (
+          <div className="absolute top-3 right-3 bg-[#C9A875] text-[#1F1A16] text-xs font-semibold px-2.5 py-1 rounded-full shadow-md">
+            Added ✓
+          </div>
+        )}
       </div>
 
-      <div className="flex-1">
-        <h3 className="font-display font-light text-[#1F1A16] text-lg mb-1 leading-snug">
-          {service.title}
-        </h3>
-        <p className="text-[#8A7B6C] text-sm leading-relaxed">
+      {/* Details below image */}
+      <div className="pt-4 flex flex-col gap-2">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-display font-light text-[#1F1A16] text-lg leading-tight">
+            <span className="mr-1.5">{service.icon}</span>
+            {service.title}
+          </h3>
+          <span className="font-display font-light text-base text-[#1F1A16] whitespace-nowrap shrink-0">
+            From £{service.priceFrom.toLocaleString("en-GB")}
+          </span>
+        </div>
+
+        <p className="text-sm text-[#8A7B6C] leading-relaxed line-clamp-2">
           {service.description}
         </p>
-      </div>
 
-      <button
-        onClick={toggle}
-        className={`w-full rounded-sm py-2.5 text-sm font-medium transition-colors ${
-          inCart
-            ? "bg-[#C9A875] text-[#1F1A16] hover:bg-[#B8996A]"
-            : "border border-[#1F1A16] text-[#1F1A16] hover:bg-[#1F1A16] hover:text-[#F5F0E8]"
-        }`}
-      >
-        {inCart ? "Added ✓" : "Add to build"}
-      </button>
-    </div>
+        <button
+          onClick={() =>
+            add({ id: service.id, title: service.title, priceFrom: service.priceFrom })
+          }
+          disabled={inCart}
+          className={`mt-2 w-full rounded-full px-4 py-2.5 text-sm font-medium transition-all ${
+            inCart
+              ? "bg-[#E4DACC] text-[#8A7B6C] cursor-not-allowed"
+              : "bg-[#1F1A16] text-[#F5F0E8] hover:bg-[#2a241e]"
+          }`}
+        >
+          {inCart ? "✓ Added to build" : "Add to build"}
+        </button>
+      </div>
+    </article>
   );
 }
