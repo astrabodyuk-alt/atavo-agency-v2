@@ -9,6 +9,7 @@ type Props = { service: Service };
 export default function ServiceCard({ service }: Props) {
   const { items, add } = useCart();
   const inCart = items.some((i) => i.id === service.id);
+  const Icon = service.icon;
 
   return (
     <article className="group flex flex-col">
@@ -21,7 +22,6 @@ export default function ServiceCard({ service }: Props) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
-        {/* In-cart badge */}
         {inCart && (
           <div className="absolute top-3 right-3 bg-[#C9A875] text-[#1F1A16] text-xs font-semibold px-2.5 py-1 rounded-full shadow-md">
             Added ✓
@@ -32,8 +32,8 @@ export default function ServiceCard({ service }: Props) {
       {/* Details below image */}
       <div className="pt-4 flex flex-col gap-2">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-display font-light text-[#1F1A16] text-lg leading-tight">
-            <span className="mr-1.5">{service.icon}</span>
+          <h3 className="font-display font-light text-[#1F1A16] text-lg leading-tight flex items-center gap-2">
+            <Icon size={15} strokeWidth={1.5} className="text-[#8A7B6C] shrink-0 mt-0.5" />
             {service.title}
           </h3>
           <span className="font-display font-light text-base text-[#1F1A16] whitespace-nowrap shrink-0">
