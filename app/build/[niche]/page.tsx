@@ -53,10 +53,7 @@ export default async function BuildNichePage({
         </div>
 
         {/* Niche tabs — Server Component, icons rendered directly */}
-        <div
-          className="flex gap-5 overflow-x-auto scrollbar-hide px-5 md:px-10 pb-1"
-          style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
-        >
+        <div className="flex gap-5 overflow-x-auto scrollbar-hide px-5 md:px-10 pb-1">
           {NICHES.map(({ key, label, Icon }) => (
             <Link
               key={key}
@@ -77,7 +74,7 @@ export default async function BuildNichePage({
       {/* Page title */}
       <section className="px-5 md:px-10 pt-10 pb-6 max-w-7xl mx-auto">
         <h1 className="font-display font-light text-3xl md:text-5xl text-[#1F1A16]">
-          Build your {entry.label.toLowerCase()} studio
+          {entry.cta}
         </h1>
         <p className="mt-3 text-[#8A7B6C] md:text-lg max-w-2xl">
           Pick the modules your {entry.label.toLowerCase()} business needs. Add to your build.
