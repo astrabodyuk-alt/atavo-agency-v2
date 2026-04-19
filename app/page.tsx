@@ -6,6 +6,7 @@ import HeroBanner from "@/components/airbnb/HeroBanner";
 import ListingGrid from "@/components/airbnb/ListingGrid";
 import InspirationRail from "@/components/airbnb/InspirationRail";
 import AirbnbFooter from "@/components/airbnb/Footer";
+import AuditForm from "@/components/airbnb/AuditForm";
 
 export default function Home() {
   return (
@@ -149,49 +150,7 @@ export default function Home() {
             </div>
 
             <div className="bg-[#F5F0E8] border border-[#E4DACC] rounded-xl p-8 shadow-sm">
-              <form action="/api/audit-request" method="POST" className="flex flex-col gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-[#1F1A16] mb-2">
-                    What&apos;s your business?
-                  </label>
-                  <input
-                    type="text"
-                    name="business"
-                    placeholder="e.g. Maison Claire, beauty studio"
-                    className="w-full border border-[#E4DACC] rounded-sm px-4 py-3 text-sm text-[#1F1A16] bg-[#F5F0E8] placeholder:text-[#8A7B6C]/50 focus:outline-none focus:border-[#C9A875] transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#1F1A16] mb-2">
-                    Your website (if any)
-                  </label>
-                  <input
-                    type="url"
-                    name="website"
-                    placeholder="https://..."
-                    className="w-full border border-[#E4DACC] rounded-sm px-4 py-3 text-sm text-[#1F1A16] bg-[#F5F0E8] placeholder:text-[#8A7B6C]/50 focus:outline-none focus:border-[#C9A875] transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#1F1A16] mb-2">
-                    What&apos;s the one thing you&apos;d fix if you could?
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    className="w-full border border-[#E4DACC] rounded-sm px-4 py-3 text-sm text-[#1F1A16] bg-[#F5F0E8] placeholder:text-[#8A7B6C]/50 focus:outline-none focus:border-[#C9A875] transition-colors resize-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-[#1F1A16] text-[#F5F0E8] rounded-sm py-3 text-sm font-medium hover:bg-[#1F1A16]/90 transition-colors"
-                >
-                  Send my request
-                </button>
-                <p className="text-[#8A7B6C] text-xs text-center">
-                  We reply within 24h. Your details stay with us.
-                </p>
-              </form>
+              <AuditForm />
             </div>
           </div>
         </section>
