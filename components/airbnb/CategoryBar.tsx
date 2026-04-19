@@ -1,12 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
-import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { NICHES } from "@/data/niches";
 
 export default function CategoryBar() {
-  const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: "left" | "right") => {
@@ -38,18 +37,17 @@ export default function CategoryBar() {
         <div
           ref={scrollRef}
           className="w-full overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth px-5 md:px-16"
-          style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
           <div className="flex items-center gap-5 md:gap-8 min-w-max mx-auto md:justify-center">
             {NICHES.map(({ key, label, Icon }) => (
-              <button
+              <Link
                 key={key}
-                onClick={() => router.push(`/build/${key}`)}
+                href={`/build/${key}`}
                 className="flex flex-col items-center gap-1.5 min-w-[72px] w-[72px] md:w-20 shrink-0 text-[#8A7B6C] hover:text-[#1F1A16] transition-colors"
               >
                 <Icon size={22} strokeWidth={1.5} />
                 <span className="text-[10px] md:text-xs font-medium whitespace-nowrap">{label}</span>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
