@@ -414,7 +414,7 @@ export const SERVICES: Service[] = [
     Icon: Palette,
     description:
       "Artisan website with commission flow, process gallery, and waitlist signup.",
-    image: U("photo-1487530811015-780c5c89d034"),
+    image: U("photo-1603796846097-bee99e4a601f"),
     pricing: { type: "build", oneOff: 790, klarna: true },
   },
   {
@@ -434,7 +434,7 @@ export const SERVICES: Service[] = [
     Icon: Mail,
     description:
       "Collect interest before a drop. Auto-email when slots open. Build scarcity.",
-    image: U("photo-1516387938699-a927ef949ece"),
+    image: U("photo-1513519245088-0e12902e5a38"),
     pricing: { type: "managed", monthly: 19, oneOff: 350 },
   },
   {
@@ -444,7 +444,7 @@ export const SERVICES: Service[] = [
     Icon: ShoppingBag,
     description:
       "Lightweight e-commerce for limited editions — with inventory alerts.",
-    image: U("photo-1490750967868-88df5691cc89"),
+    image: U("photo-1558618666-fcd25c85cd64"),
     pricing: { type: "build", oneOff: 800, klarna: true },
   },
   {
@@ -568,7 +568,7 @@ export const SERVICES: Service[] = [
     Icon: Mail,
     description:
       "Auto-send a curated email to your list each time new stock arrives.",
-    image: U("photo-1516387938699-a927ef949ece"),
+    image: U("photo-1526570207772-784d36084510"),
     pricing: { type: "managed", monthly: 19, oneOff: 350 },
   },
   {
@@ -630,7 +630,7 @@ export const SERVICES: Service[] = [
     Icon: Mail,
     description:
       "Automated 5-email welcome sequence that converts trial visitors into regulars.",
-    image: U("photo-1516387938699-a927ef949ece"),
+    image: U("photo-1574068468668-a05a11f871da"),
     pricing: { type: "managed", monthly: 29, oneOff: 400 },
   },
   {

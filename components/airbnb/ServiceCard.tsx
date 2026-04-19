@@ -48,13 +48,14 @@ export default function ServiceCard({ service }: Props) {
     <div className="flex flex-col h-full bg-[#F5F0E8] rounded-2xl overflow-hidden border border-[#E4DACC] group">
 
       {/* Image — hauteur fixe via aspect-ratio */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-[#E8DFD2] to-[#C9A875]">
         <Image
           src={service.image}
           alt={service.title}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
         />
         {service.badge && (
           <span
