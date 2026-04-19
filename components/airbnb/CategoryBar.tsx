@@ -38,8 +38,15 @@ export default function CategoryBar() {
 
   return (
     <div className="sticky top-20 z-40 bg-[#F5F0E8] border-b border-[#E4DACC] py-4">
-      <div className="flex items-center px-10 gap-4">
-        {/* Left arrow */}
+      {/* Fix 1 — editorial label */}
+      <div className="text-center mb-6">
+        <span className="text-[11px] tracking-[0.2em] uppercase text-[#8A7B6C] font-medium">
+          Choose your niche
+        </span>
+      </div>
+
+      {/* Fix 2 — centered carousel */}
+      <div className="relative flex items-center px-10 gap-4">
         <button
           onClick={() => scroll("left")}
           className="shrink-0 h-10 w-10 rounded-full border border-[#E4DACC] bg-[#F5F0E8] shadow-sm hover:shadow-md flex items-center justify-center transition-shadow"
@@ -48,31 +55,28 @@ export default function CategoryBar() {
           <ChevronLeft size={16} className="text-[#1F1A16]" />
         </button>
 
-        {/* Niche pills */}
-        <div
-          ref={scrollRef}
-          className="flex items-center gap-8 overflow-x-auto scrollbar-hide flex-1"
-        >
-          {niches.map(({ key, label, icon: Icon }) => {
-            const isActive = selectedNiche === key;
-            return (
-              <button
-                key={key}
-                onClick={() => handleClick(key)}
-                className={`flex flex-col items-center gap-1.5 w-20 shrink-0 pb-4 -mb-4 transition-all ${
-                  isActive
-                    ? "text-[#1F1A16] border-b-2 border-[#C9A875]"
-                    : "text-[#8A7B6C] hover:text-[#1F1A16] border-b-2 border-transparent"
-                }`}
-              >
-                <Icon size={22} strokeWidth={1.5} />
-                <span className="text-xs font-medium whitespace-nowrap">{label}</span>
-              </button>
-            );
-          })}
+        <div ref={scrollRef} className="flex-1 overflow-x-auto scrollbar-hide">
+          <div className="flex items-center gap-8 px-8 justify-center min-w-max mx-auto">
+            {niches.map(({ key, label, icon: Icon }) => {
+              const isActive = selectedNiche === key;
+              return (
+                <button
+                  key={key}
+                  onClick={() => handleClick(key)}
+                  className={`flex flex-col items-center gap-1.5 w-20 shrink-0 pb-4 -mb-4 transition-all ${
+                    isActive
+                      ? "text-[#1F1A16] border-b-2 border-[#C9A875]"
+                      : "text-[#8A7B6C] hover:text-[#1F1A16] border-b-2 border-transparent"
+                  }`}
+                >
+                  <Icon size={22} strokeWidth={1.5} />
+                  <span className="text-xs font-medium whitespace-nowrap">{label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Right arrow */}
         <button
           onClick={() => scroll("right")}
           className="shrink-0 h-10 w-10 rounded-full border border-[#E4DACC] bg-[#F5F0E8] shadow-sm hover:shadow-md flex items-center justify-center transition-shadow"
