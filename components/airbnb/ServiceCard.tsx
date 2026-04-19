@@ -47,7 +47,7 @@ export default function ServiceCard({ service }: Props) {
       {/* Details below image */}
       <div className="pt-4 flex flex-col gap-2">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-display font-light text-[#1F1A16] text-lg leading-tight flex items-center gap-2.5">
+          <h3 className="font-display font-light text-[#1F1A16] text-base md:text-lg leading-tight flex items-center gap-2.5">
             <Icon
               size={18}
               strokeWidth={1.5}

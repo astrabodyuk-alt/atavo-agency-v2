@@ -19,7 +19,7 @@ export default function ListingGrid() {
     : SERVICES;
 
   return (
-    <section className="py-12 px-10">
+    <section className="py-8 md:py-12 px-4 md:px-10">
       {/* Section header */}
       <div className="mb-2">
         <h2 className="font-display font-light text-[#1F1A16] text-3xl mb-2">

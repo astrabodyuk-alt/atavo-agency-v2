@@ -22,23 +22,23 @@ export default function CartWidget() {
 
     setCartMessage(msg);
     triggerSubmit();
+    setExpanded(false);
 
-    // Small delay to allow state to propagate before scrolling
     setTimeout(() => {
       document.getElementById("audit")?.scrollIntoView({ behavior: "smooth" });
     }, 50);
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+    <div className="fixed bottom-6 right-4 md:right-6 z-50 flex flex-col items-end gap-2">
       {/* Expanded panel */}
       {expanded && (
-        <div className="w-80 bg-[#1F1A16] rounded-xl shadow-2xl overflow-hidden">
+        <div className="w-[calc(100vw-2rem)] max-w-sm md:w-80 bg-[#1F1A16] rounded-xl shadow-2xl overflow-hidden">
           <div className="px-5 py-4 border-b border-[#F5F0E8]/10">
             <p className="text-[#F5F0E8] text-sm font-medium">Your build</p>
           </div>
 
-          <ul className="px-5 py-3 flex flex-col gap-2 max-h-60 overflow-y-auto">
+          <ul className="px-5 py-3 flex flex-col gap-2 max-h-56 overflow-y-auto">
             {items.map((item) => (
               <li key={item.id} className="flex items-center justify-between gap-3">
                 <div className="flex-1 min-w-0">
@@ -49,7 +49,7 @@ export default function CartWidget() {
                 </div>
                 <button
                   onClick={() => remove(item.id)}
-                  className="shrink-0 text-[#8A7B6C] hover:text-[#F5F0E8] transition-colors"
+                  className="shrink-0 text-[#8A7B6C] hover:text-[#F5F0E8] transition-colors p-1"
                   aria-label={`Remove ${item.title}`}
                 >
                   <X size={14} />
@@ -76,7 +76,7 @@ export default function CartWidget() {
           <div className="px-5 pb-5">
             <button
               onClick={handleGetQuote}
-              className="w-full bg-[#C9A875] text-[#1F1A16] rounded-sm py-3 text-sm font-medium hover:bg-[#B8996A] transition-colors"
+              className="w-full bg-[#C9A875] text-[#1F1A16] rounded-sm py-3 text-sm font-medium hover:bg-[#B8996A] transition-colors min-h-[44px]"
             >
               Get your quote →
             </button>
@@ -87,13 +87,13 @@ export default function CartWidget() {
       {/* Floating pill */}
       <button
         onClick={() => setExpanded((v) => !v)}
-        className="flex items-center gap-3 bg-[#1F1A16] text-[#F5F0E8] rounded-full px-5 py-3 shadow-xl hover:bg-[#1F1A16]/90 transition-colors"
+        className="flex items-center gap-2 md:gap-3 bg-[#1F1A16] text-[#F5F0E8] rounded-full px-4 md:px-5 py-3 shadow-xl hover:bg-[#1F1A16]/90 transition-colors min-h-[44px]"
       >
         <ShoppingBag size={16} className="text-[#C9A875]" />
         <span className="text-sm font-medium">
-          {items.length} module{items.length !== 1 ? "s" : ""}
+          {items.length}
         </span>
-        <span className="text-[#C9A875] text-sm font-display font-light">
+        <span className="text-[#C9A875] text-sm font-display font-light hidden sm:inline">
           From £{total().toLocaleString()}
         </span>
         {expanded ? (

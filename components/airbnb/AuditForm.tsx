@@ -99,7 +99,7 @@ export default function AuditForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Tell us what you want to improve, build or fix. The more specific the better."
-          className="w-full border border-[#E4DACC] rounded-sm px-4 py-3 text-sm text-[#1F1A16] bg-[#F5F0E8] placeholder:text-[#8A7B6C]/50 focus:outline-none focus:border-[#C9A875] transition-colors resize-none"
+          className="w-full border border-[#E4DACC] rounded-sm px-4 py-3 text-sm text-[#1F1A16] bg-[#F5F0E8] placeholder:text-[#8A7B6C]/50 focus:outline-none focus:border-[#C9A875] transition-colors resize-none min-h-[120px] md:min-h-[140px]"
         />
       </div>
 

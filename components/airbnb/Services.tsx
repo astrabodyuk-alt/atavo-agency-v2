@@ -49,7 +49,7 @@ const bullets = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 px-10 bg-[#E8DFD2]">
+    <section id="services" className="py-12 md:py-20 px-5 md:px-10 bg-[#E8DFD2]">
       <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">What we build</span>
       <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-3">
         Four disciplines, one hand.

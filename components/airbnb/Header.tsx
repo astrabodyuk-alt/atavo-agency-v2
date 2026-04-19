@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
-import { Globe, Menu, X } from "lucide-react";
+import { Globe, Menu, X, Search, Check } from "lucide-react";
 import SearchPopover, { type PopoverOption } from "./SearchPopover";
 import { useSearchStore } from "@/lib/searchStore";
 
@@ -34,6 +34,7 @@ type OpenPill = "business" | "timeline" | "budget" | null;
 
 export default function AirbnbHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [openPill, setOpenPill] = useState<OpenPill>(null);
   const [toast, setToast] = useState(false);
 
@@ -51,9 +52,13 @@ export default function AirbnbHeader() {
       setToast(true);
       setTimeout(() => setToast(false), 3500);
     }
-    // Always scroll and trigger — AuditForm handles the empty case gracefully
     triggerSubmit();
     document.getElementById("audit")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleMobileSubmit = () => {
+    setMobileSearchOpen(false);
+    handleSubmit();
   };
 
   return (
@@ -70,15 +75,14 @@ export default function AirbnbHeader() {
       </div>
 
       <header className="sticky top-0 z-50 bg-[#F5F0E8]/95 backdrop-blur-md border-b border-[#E4DACC] h-20">
-        <div className="flex items-center justify-between h-full px-10">
+        <div className="flex items-center justify-between h-full px-4 md:px-10 gap-3">
           {/* Wordmark */}
           <Link href="/" className="font-display font-light text-2xl text-[#1F1A16] shrink-0">
             Atavo<span className="text-[#C9A875]">.</span>
           </Link>
 
-          {/* Pill Search Bar */}
+          {/* DESKTOP: pill search bar */}
           <div className="hidden md:flex items-center bg-[#F5F0E8] border border-[#E4DACC] rounded-full shadow-md h-14 px-2 hover:shadow-lg transition-shadow">
-
             {/* Segment 1 — Business type */}
             <div className="relative">
               <button
@@ -153,7 +157,6 @@ export default function AirbnbHeader() {
                   align="right"
                 />
               )}
-              {/* Submit button */}
               <button
                 onClick={handleSubmit}
                 className="h-[42px] rounded-full bg-[#C9A875] hover:bg-[#B8965F] transition-colors px-[22px] shrink-0 text-xs font-semibold text-[#1F1A16] whitespace-nowrap"
@@ -163,8 +166,26 @@ export default function AirbnbHeader() {
             </div>
           </div>
 
+          {/* MOBILE: single trigger pill */}
+          <button
+            className="md:hidden flex-1 flex items-center justify-between rounded-full border border-[#E4DACC] bg-[#F5F0E8] px-4 py-2.5 shadow-sm"
+            onClick={() => setMobileSearchOpen(true)}
+          >
+            <div className="flex flex-col items-start min-w-0">
+              <span className="text-[10px] uppercase tracking-wider text-[#8A7B6C] font-medium">
+                Tell us about you
+              </span>
+              <span className="text-sm text-[#1F1A16] font-medium truncate">
+                {[businessType, timeline, budget].filter(Boolean).join(" · ") || "Business · Timeline · Budget"}
+              </span>
+            </div>
+            <span className="w-9 h-9 rounded-full bg-[#C9A875] flex items-center justify-center shrink-0 ml-2">
+              <Search size={16} className="text-[#1F1A16]" />
+            </span>
+          </button>
+
           {/* Right nav */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 shrink-0">
             <Link
               href="#audit"
               className="hidden md:block text-sm font-medium text-[#1F1A16] hover:text-[#8A7B6C] transition-colors whitespace-nowrap px-3 py-2 rounded-full hover:bg-[#E8DFD2]"
@@ -172,7 +193,7 @@ export default function AirbnbHeader() {
               Atavo your business
             </Link>
             <button
-              className="flex items-center gap-2 border border-[#E4DACC] rounded-full px-4 py-2.5 hover:shadow-md transition-shadow bg-[#F5F0E8]"
+              className="flex items-center gap-2 border border-[#E4DACC] rounded-full px-3 py-2.5 hover:shadow-md transition-shadow bg-[#F5F0E8]"
               onClick={() => setMobileOpen(true)}
             >
               <Menu size={18} className="text-[#1F1A16]" />
@@ -182,7 +203,111 @@ export default function AirbnbHeader() {
         </div>
       </header>
 
-      {/* Mobile overlay — untouched */}
+      {/* Mobile search bottom sheet */}
+      {mobileSearchOpen && (
+        <div className="fixed inset-0 z-[60] flex flex-col justify-end md:hidden">
+          <div
+            className="absolute inset-0 bg-[#1F1A16]/40"
+            onClick={() => setMobileSearchOpen(false)}
+          />
+          <div className="relative bg-[#F5F0E8] rounded-t-2xl px-5 pt-4 pb-8 max-h-[90vh] overflow-y-auto">
+            {/* Handle bar */}
+            <div className="w-10 h-1 bg-[#E4DACC] rounded-full mx-auto mb-5" />
+
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-sm font-semibold text-[#1F1A16]">Tell us about your business</p>
+              <button onClick={() => setMobileSearchOpen(false)}>
+                <X size={20} className="text-[#1F1A16]" />
+              </button>
+            </div>
+
+            {/* Business type */}
+            <div className="mb-6">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#8A7B6C] mb-3">
+                Business type
+              </p>
+              <div className="flex flex-col gap-2">
+                {BUSINESS_TYPES.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setBusinessType(businessType === opt.value ? null : opt.value)}
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm transition-colors min-h-[44px] ${
+                      businessType === opt.value
+                        ? "bg-[#C9A875]/20 text-[#1F1A16] font-medium"
+                        : "bg-[#E8DFD2] text-[#8A7B6C]"
+                    }`}
+                  >
+                    <span>{opt.value}</span>
+                    {businessType === opt.value && <Check size={14} className="text-[#C9A875] shrink-0" />}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Timeline */}
+            <div className="mb-6">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#8A7B6C] mb-3">
+                Ready to launch
+              </p>
+              <div className="flex flex-col gap-2">
+                {TIMELINES.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setTimeline(timeline === opt.value ? null : opt.value)}
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm transition-colors min-h-[44px] ${
+                      timeline === opt.value
+                        ? "bg-[#C9A875]/20 text-[#1F1A16] font-medium"
+                        : "bg-[#E8DFD2] text-[#8A7B6C]"
+                    }`}
+                  >
+                    <span>{opt.value}</span>
+                    <span className="flex items-center gap-2">
+                      {opt.meta && <span className="text-xs text-[#8A7B6C]/70">{opt.meta}</span>}
+                      {timeline === opt.value && <Check size={14} className="text-[#C9A875]" />}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Budget */}
+            <div className="mb-8">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#8A7B6C] mb-3">
+                Budget
+              </p>
+              <div className="flex flex-col gap-2">
+                {BUDGETS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setBudget(budget === opt.value ? null : opt.value)}
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm transition-colors min-h-[44px] ${
+                      budget === opt.value
+                        ? "bg-[#C9A875]/20 text-[#1F1A16] font-medium"
+                        : "bg-[#E8DFD2] text-[#8A7B6C]"
+                    }`}
+                  >
+                    <span>{opt.value}</span>
+                    <span className="flex items-center gap-2">
+                      {opt.meta && <span className="text-xs text-[#8A7B6C]/70">{opt.meta}</span>}
+                      {budget === opt.value && <Check size={14} className="text-[#C9A875]" />}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Submit */}
+            <button
+              onClick={handleMobileSubmit}
+              className="w-full bg-[#C9A875] text-[#1F1A16] rounded-full py-4 text-sm font-semibold min-h-[52px]"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile nav overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 bg-[#F5F0E8] flex flex-col px-6 py-6">
           <div className="flex justify-between items-center mb-12">

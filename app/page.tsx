@@ -79,7 +79,7 @@ export default function Home() {
         <Services />
 
         {/* About — The Studio */}
-        <section id="about" className="py-20 px-10 bg-[#F5F0E8]">
+        <section id="about" className="py-12 md:py-20 px-5 md:px-10 bg-[#F5F0E8]">
           <div className="max-w-2xl">
             <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">The Studio</span>
             <p className="text-[#8A7B6C] text-sm mt-3 mb-6 tracking-wide">
@@ -96,7 +96,7 @@ export default function Home() {
         </section>
 
         {/* Pricing */}
-        <section id="pricing" className="py-20 px-10 bg-[#E8DFD2]">
+        <section id="pricing" className="py-12 md:py-20 px-5 md:px-10 bg-[#E8DFD2]">
           <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">Pricing</span>
           <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl mt-3 mb-4">
             Three ways in.
@@ -203,8 +203,8 @@ export default function Home() {
         </section>
 
         {/* Audit Form */}
-        <section id="audit" className="py-20 px-10 bg-[#F5F0E8]">
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl">
+        <section id="audit" className="py-12 md:py-20 px-5 md:px-10 bg-[#F5F0E8]">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-6xl">
             <div>
               <h2 className="font-display font-light text-4xl text-[#1F1A16] mb-4">
                 Start with a free quick scan.
