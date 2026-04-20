@@ -77,7 +77,7 @@ export default function Home() {
           <div className="max-w-2xl">
             <span className="uppercase tracking-widest text-xs text-[#C9A875] font-medium">The Studio</span>
             <p className="text-[#8A7B6C] text-sm mt-3 mb-6 tracking-wide">
-              Slow atelier &middot; Winchester &middot; Hampshire
+              Slow atelier &middot; Southampton &middot; Hampshire
             </p>
             <h2 className="font-display font-light text-[#1F1A16] text-4xl md:text-5xl leading-[1.1] mb-8">
               One quiet workshop for businesses that want to grow.
@@ -85,7 +85,7 @@ export default function Home() {
             <p className="text-[#8A7B6C] leading-relaxed text-base mb-6">
               Atavo is a small digital studio in Hampshire. We build websites, SaaS and automations for a handful of businesses each quarter — beauty houses, restaurants, cellars, craftsmen, trades. Before we build, we audit. Before we ship, we read. Three clients a month. No more.
             </p>
-            <p className="text-[#8A7B6C] text-sm font-medium mt-8">— Nigel, Winchester</p>
+            <p className="text-[#8A7B6C] text-sm font-medium mt-8">— Nigel, Southampton</p>
           </div>
         </section>
 
